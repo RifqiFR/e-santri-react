@@ -39,9 +39,13 @@ const Admin = (props) => {
   const [lastPath, setLastPath] = React.useState("");
 
   React.useEffect(() => {
+    if(localStorage.getItem('data_admin') == null) {
+      localStorage.setItem('data_admin', JSON.stringify(DUMMY_ADMIN))
+    }
     let splittedPath = window.location.pathname.split("/");
     setLastPath(splittedPath[splittedPath.length - 1])
-  }, [lastPath]);
+    console.log(localStorage.getItem('data_admin'))
+  }, [lastPath, localStorage.getItem('data_admin')]);
 
   return (
     <>
@@ -82,26 +86,50 @@ const Admin = (props) => {
           </tr>
         </thead>
         <tbody>
-          {DUMMY_ADMIN.map((s, i) => (
-            <tr key={s.id}>
-              <th scope="row" className="align-middle">
-                {i + 1}
-              </th>
-              <td className="align-middle">
-                {s.name}
-              </td>
-              <td className="align-middle">
-                {s.nip}
-              </td>
-              <td className="align-middle">
-                {s.email}
-              </td>
-              <td className="d-flex justify-content-center">
-                <Link to={'/super-admin/admin-smp/'+s.id} className="mr-2"><Button color="warning">Lihat</Button></Link>
-                <Button color="danger">Hapus</Button>
-              </td>
-            </tr>
-          ))}
+          {localStorage.getItem('data_admin') == null ? (
+              DUMMY_ADMIN.map((s, i) => (
+                <tr key={s.id}>
+                  <th scope="row" className="align-middle">
+                    {i + 1}
+                  </th>
+                  <td className="align-middle">
+                    {s.name}
+                  </td>
+                  <td className="align-middle">
+                    {s.nip}
+                  </td>
+                  <td className="align-middle">
+                    {s.email}
+                  </td>
+                  <td className="d-flex justify-content-center">
+                    <Link to={'/super-admin/admin-smp/'+s.id} className="mr-2"><Button color="warning">Lihat</Button></Link>
+                    <Button color="danger">Hapus</Button>
+                  </td>
+                </tr>
+              ))
+            ) :
+            (
+              JSON.parse(localStorage.getItem('data_admin')).map((s, i) => (
+                <tr key={s.id}>
+                  <th scope="row" className="align-middle">
+                    {i + 1}
+                  </th>
+                  <td className="align-middle">
+                    {s.name}
+                  </td>
+                  <td className="align-middle">
+                    {s.nip}
+                  </td>
+                  <td className="align-middle">
+                    {s.email}
+                  </td>
+                  <td className="d-flex justify-content-center">
+                    <Link to={'/super-admin/admin-smp/'+s.id} className="mr-2"><Button color="warning">Lihat</Button></Link>
+                    <Button color="danger">Hapus</Button>
+                  </td>
+                </tr>
+              ))
+            )}
         </tbody>
       </Table>
     </>
