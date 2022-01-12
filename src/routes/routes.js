@@ -20,20 +20,20 @@ export const APP_ROUTE = [
     private: false,
     isAdmin: true,
   },
-  // {
-  //   name: "Error Page not found",
-  //   path: "/*",
-  //   component: ErrorPage,
-  //   private: true,
-  //   exact: true,
-  //   isNotFound: true,
-  // },
-  // {
-  //   name: "Error Page not found",
-  //   path: "/error",
-  //   component: ErrorPage,
-  //   private: true,
-  //   exact: true,
-  //   isNotFound: true,
-  // }
+  {
+    name: "Error Page not found",
+    path: "/*",
+    component: ErrorPage,
+    private: true,
+    exact: true,
+    isNotFound: true,
+  },
+  {
+    name: "Error Page not found",
+    path: "/error",
+    component: ErrorPage,
+    private: true,
+    exact: true,
+    isNotFound: true,
+  }
 ];
