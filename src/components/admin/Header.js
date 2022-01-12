@@ -14,7 +14,7 @@ import {
 } from "reactstrap";
 import { MdHttps } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
-import { IoMdExit } from "react-icons/io";
+import { IoMdExit, IoMdNotifications } from "react-icons/io";
 import { Link, useHistory } from "react-router-dom";
 import { logout } from "utils/auth";
 import { GET_SELF, JWT_HEADER } from "constants/urls";
@@ -32,20 +32,20 @@ const Header = () => {
     setModalShow(true);
   };
 
-  React.useEffect(() => {
-    axios
-      .get(GET_SELF(), {
-        headers: { Authorization: `Bearer ${JWT_HEADER}` },
-      })
-      .then((res) => {
-        setRole(res.data.data.role);
-        setName(res.data.data.name);
-        setHealthAgency(res.data.data.health_agency.name);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // React.useEffect(() => {
+  //   axios
+  //     .get(GET_SELF(), {
+  //       headers: { Authorization: `Bearer ${JWT_HEADER}` },
+  //     })
+  //     .then((res) => {
+  //       setRole(res.data.data.role);
+  //       setName(res.data.data.name);
+  //       setHealthAgency(res.data.data.health_agency.name);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
   const onLogout = () => {
     logout();
@@ -80,7 +80,7 @@ const Header = () => {
               </InputGroup> */}
             </FormGroup>
           </Form>
-          <Nav className="align-items-center d-none d-md-flex" navbar>
+          <Nav className="align-items-center d-none d-md-flex py-2" navbar>
             {/* <UncontrolledDropdown nav>
               <DropdownToggle nav className="nav-link-icon">
                 <i className="ni ni-bell-55" />
@@ -95,38 +95,8 @@ const Header = () => {
                 <DropdownItem>Something else here</DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown> */}
-            <UncontrolledDropdown nav>
-              <DropdownToggle className="pr-0" nav>
-                <Media className="align-items-center">
-                  <span className="avatar avatar-sm rounded-circle">
-                    {/* <img alt="..." /> */}
-                  </span>
-                  <Media className="ml-2 d-none d-lg-block">
-                    <span className="mb-0 text-sm font-weight-bold">
-                      {name}
-                    </span>
-                  </Media>
-                </Media>
-              </DropdownToggle>
-              <DropdownMenu className="dropdown-menu-arrow" right>
-                <DropdownItem className="noti-title" header tag="div">
-                  <h6 className="text-overflow m-0">Welcome!</h6>
-                </DropdownItem>
-                <DropdownItem onClick={toProfile}>
-                  <FaUserCircle />
-                  <span>Profile</span>
-                </DropdownItem>
-                <DropdownItem onClick={changePassword}>
-                  <MdHttps />
-                  <span>Ganti Password</span>
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem onClick={onLogout}>
-                  <IoMdExit />
-                  <span>Logout</span>
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            <div className="mr-2">Admin</div>
+            <IoMdNotifications size={24} className="cursor-pointer" />
           </Nav>
         </Container>
       </Navbar>

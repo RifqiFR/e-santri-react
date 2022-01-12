@@ -11,7 +11,7 @@ const AdminRoute = ({ component: Component, setTitle, setPath, ...rest }) => {
   React.useEffect(() => {
     setTitle(rest.nameRoute);
     setPath(rest.path);
-  }, []);
+  }, [rest.nameRoute, rest.path, setPath, setTitle]);
 
   return (
     // Show the component only when the user is logged in
@@ -19,25 +19,26 @@ const AdminRoute = ({ component: Component, setTitle, setPath, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        isLogin() ? (
-          isAdmin() ? (
-            !rest.isNotFound ? (
-              <Component />
-            ) : (
-              <>
-                <Redirect to="/error" />
-                <Component />
-              </>
-            )
-          ) : (
-            <>
-              <Redirect to="/pasien" />
-              <Component />
-            </>
-          )
-        ) : (
-          <Redirect to="/login" />
-        )
+        // true ? (
+        //   true ? (
+        //     !rest.isNotFound ? (
+        //       <Component />
+        //     ) : (
+        //       <>
+        //         <Redirect to="/error" />
+        //         <Component />
+        //       </>
+        //     )
+        //   ) : (
+        //     <>
+        //       <Redirect to="/pasien" />
+        //       <Component />
+        //     </>
+        //   )
+        // ) : (
+        //   <Redirect to="/login" />
+        // )
+        <Component />
       }
     />
   );

@@ -1,50 +1,85 @@
-import AdminContainer from "components/admin/AdminContainer";
-import ScanQR from "pages/admin/ScanQR";
-import ErrorPage from "../pages/404Pages/ErrorPage";
-import WaitingList from "pages/admin/WaitingList";
-import AdminProfile from "../pages/admin/AdminProfile";
-import AboutUsPage from "../pages/AboutUsPage";
+import Dashboard from "pages/admin/Dashboard";
+import Santri from "../pages/admin/Santri";
+import SPP from "pages/admin/SPP";
+import SantriDetail from "pages/admin/SantriDetail";
+import SantriForm from "pages/admin/SantriForm";
+import KartuSantri from "pages/admin/KartuSantri";
+import KartuSantriCetak from "pages/admin/KartuSantriCetak";
+import Pengaturan from "pages/admin/Pengaturan";
+import Notifikasi from "pages/admin/Notifikasi";
 
 export const APP_ADMIN_ROUTE = [
   {
-    name: "QR Scan",
-    path: "/admin/scan-qr",
+    name: "Dashboard",
+    path: "/admin/dashboard",
     exact: true,
-    component: ScanQR,
-    private: true,
-    isAdmin: true,
+    component: Dashboard,
+    // private: true,
+    // isAdmin: true,
   },
   {
-    name: "Data Antrian Pasien",
-    path: "/admin/antrian-pasien",
+    name: "Santri",
+    path: "/admin/santri",
     exact: true,
-    component: WaitingList,
-    private: true,
-    isAdmin: true,
+    component: Santri,
+    // private: true,
+    // isAdmin: true,
   },
   {
-    name: "Profile",
-    path: "/admin/profile",
+    name: "Santri",
+    path: "/admin/santri/create",
     exact: true,
-    component: AdminProfile,
-    private: true,
-    isAdmin: true,
+    component: SantriForm,
+    // private: true,
+    // isAdmin: true,
   },
   {
-    name: "Tentang Kami",
-    path: "/admin/about-us/",
+    name: "Santri",
+    path: "/admin/santri/:id",
     exact: true,
-    component: AboutUsPage,
-    private: true,
-    isAdmin: true,
+    component: SantriDetail,
+    // private: true,
+    // isAdmin: true,
   },
   {
-    name: "Halaman Error",
-    path: "/admin/*",
+    name: "Tagihan SPP",
+    path: "/admin/spp",
     exact: true,
-    component: ErrorPage,
-    private: true,
-    isAdmin: true,
-    isNotFound: true,
+    component: SPP,
+    // private: true,
+    // isAdmin: true,
   },
+  {
+    name: "Cetak Kartu Santri",
+    path: "/admin/kartusantri",
+    exact: true,
+    component: KartuSantri,
+    // private: true,
+    // isAdmin: true,
+  },
+  {
+    name: "Cetak Kartu Santri",
+    path: "/admin/kartusantri/:id/cetak",
+    exact: true,
+    component: KartuSantriCetak,
+    // private: true,
+    // isAdmin: true,
+  },
+  {
+    name: "Notifikasi",
+    path: "/admin/notifikasi",
+    exact: true,
+    component: Notifikasi,
+    // private: true,
+    // isAdmin: true,
+  },
+  {
+    name: "Pengaturan",
+    path: "/admin/pengaturan",
+    exact: true,
+    component: Pengaturan,
+    // private: true,
+    // isAdmin: true,
+  },
+
 ];

@@ -7,7 +7,7 @@ const FooterBar = () => {
         <div className="col-lg-6">
           <div className="copyright text-center text-lg-left text-muted">
             <a>
-              &copy;{new Date().getFullYear()} Antrian sehat alright reserved
+              &copy;{new Date().getFullYear()} E-Santri alright reserved
             </a>
           </div>
         </div>

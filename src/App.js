@@ -36,9 +36,9 @@ const App = () => {
             />
           );
         })}
-        <Route path="/">
+        {/* <Route path="/">
           <Redirect to="/login" />
-        </Route>
+        </Route> */}
       </Switch>
     </Router>
   );

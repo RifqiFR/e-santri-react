@@ -11,94 +11,156 @@
 import React from "react";
 import {
   Button,
-  Container,
-  Nav,
-  Navbar,
-  Jumbotron,
-  Row,
-  Col,
-  Spinner,
-  Alert,
-} from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
-import { logout } from "utils/auth";
-import axios from "axios";
-import { GET_FILMS } from "constants/urls";
+  Form,
+  FormGroup,
+  Input,
+  Table
+} from "reactstrap";
+import { Line } from "react-chartjs-2";
 
-import AdminContainer from "components/admin/AdminContainer.js";
+const DUMMY_SANTRI = [
+  {
+    id: 1,
+    name: "Rifqi Fajar Ramdhani",
+    merchant: "Mitra Media",
+    amount: 24500,
+    date: "15-07-2021",
+    time: "08:52:30",
+  },
+  {
+    id: 2,
+    name: "Affan Abiyyu",
+    merchant: "Pentol Galak",
+    amount: 10000,
+    date: "15-07-2021",
+    time: "09:52:30",
+  },
+  {
+    id: 3,
+    name: "M. Fahreza Ansori",
+    merchant: "Artisan Boba",
+    amount: 15000,
+    date: "15-07-2021",
+    time: "10:52:30",
+  },
+  {
+    id: 4,
+    name: "Dary Winata Nugraha",
+    merchant: "Mitra Media",
+    amount: 12500,
+    date: "15-07-2021",
+    time: "09:52:30",
+  },
+  {
+    id: 5,
+    name: "Praditya Nafis M.",
+    merchant: "Buku Keren",
+    amount: 13000,
+    date: "15-07-2021",
+    time: "10:48:30",
+  },
+];
 
+const DUMMY_LINE_CHART_DATA = {
+  labels: ['Mar 1', 'Apr 1', 'Mei 1'],
+  datasets: [
+    {
+      id: 1,
+      label: '',
+      borderColor: "#437C17",
+      data: [10000, 25000, 18000],
+    },
+  ],
+};
+
+const DUMY_LINE_CHART_OPTIONS = {
+  plugins: {
+    legend: {
+      display: false
+    },
+    title: {
+      display: true,
+      align: 'start',
+      font: {
+        size: 18,
+      },
+      padding: 16,
+      text: "Grafik Pendapatan Pondok"
+    }
+  },
+};
 
 const Dashboard = () => {
-  const history = useHistory();
-  const [loading, setLoading] = React.useState(true);
-  const [error, setError] = React.useState(false);
-  const [film, setFilm] = React.useState();
-
-  React.useEffect(() => {
-    axios
-      .get(GET_FILMS)
-      .then((res) => {
-        setLoading(false);
-        setFilm(res.data);
-      })
-      .catch((err) => {
-        setLoading(false);
-        setError(true);
-        console.warn(err);
-      });
-    return () => {};
-  }, []);
-
-  const _onLogout = () => {
-    logout();
-    history.replace("/");
-  };
 
   return (
-    <div>
-      <AdminContainer>
-
-      </AdminContainer>
-      
-      <Container>
-        {loading ? (
-          <Row>
-            <Col>
-              <Spinner
-                animation="border"
-                variant="primary"
-                className="d-flex justify-content-center ml-auto mr-auto"
-              >
-                <span className="sr-only">Loading...</span>
-              </Spinner>
-            </Col>
-          </Row>
-        ) : film ? (
-          film
-            .reduce(function (accumulator, currentValue, currentIndex, array) {
-              if (currentIndex % 4 === 0)
-                accumulator.push(array.slice(currentIndex, currentIndex + 4));
-              return accumulator;
-            }, [])
-            .map((p) => {
-              return (
-                <Row className="mb-4">
-                  {p.map((value) => {
-                    return (
-                      <Col>
-                        <h5>{value.title}</h5>
-                        <p>{value.description}</p>
-                      </Col>
-                    );
-                  })}
-                </Row>
-              );
-            })
-        ) : (
-          error && <Alert variant="danger">Error bang</Alert>
-        )}
-      </Container>
-    </div>
+    <>
+      <div className="chart h-100 mb-2">
+        <Line
+          datasetIdKey='id'
+          options={DUMY_LINE_CHART_OPTIONS}
+          data={DUMMY_LINE_CHART_DATA}
+        />
+      </div>
+      <div className="d-flex justify-content-between my-2">
+        <div className="d-flex align-items-center">
+          <span className="mr-2">Show </span>
+          <Input className="col-4 mr-2" type="number" name="entries" id="entries" value="5"/>
+          <span> entries</span>
+        </div>
+        <Form className="d-flex">
+          <Input className="mr-2" type="text" name="search" id="search" />
+          <Button color="secondary">Cari</Button>
+        </Form>
+      </div>
+      <Table bordered>
+        <thead>
+          <tr>
+            <th>
+              No
+            </th>
+            <th>
+              Nama Santri
+            </th>
+            <th>
+              Nama Merchant
+            </th>
+            <th>
+              Nominal (Rp)
+            </th>
+            <th>
+              Tanggal
+            </th>
+            <th>
+              Waktu
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {DUMMY_SANTRI.map((s, i) => (
+            <tr key={s.name}>
+              <th scope="row" className="align-middle">
+                {i + 1}
+              </th>
+              <td className="align-middle">
+                {s.name}
+              </td>
+              <td className="align-middle">
+                {s.merchant}
+              </td>
+              <td className="align-middle">
+                {s.amount}
+              </td>
+              <td className="align-middle">
+                {s.date}
+              </td>
+              <td className="align-middle">
+                {s.time}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </>
   );
 };
 

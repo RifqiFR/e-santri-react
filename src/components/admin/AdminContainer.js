@@ -4,7 +4,7 @@ import React from "react";
 import { Container, Row, Col, Card, CardBody, CardHeader } from "reactstrap";
 
 import Header from "components/admin/Header.js";
-import Sidebar from "components/admin/Sidebar.js";
+import Sidebar from "components/Sidebar.js";
 import { Link, Switch, Redirect } from "react-router-dom";
 import AdminRoute from "components/AdminRoute";
 import { APP_ADMIN_ROUTE } from "routes/admin_routes";
@@ -13,6 +13,8 @@ import FooterBar from "../FooterBar";
 
 import "admin-assets/css/argon-dashboard-react.css";
 import "admin-assets/plugins/nucleo/css/nucleo.css";
+
+import { ADMIN_SIDEBAR_CONTENT } from "../../constants/sidebar_contents"
 
 const AdminContainer = (props) => {
   const [title, setTitle] = React.useState("");
@@ -27,6 +29,7 @@ const AdminContainer = (props) => {
           imgSrc: require("images/pasien/logo.png"),
           imgAlt: "...",
         }}
+        content={ADMIN_SIDEBAR_CONTENT}
       />
       <div className="main-content">
         <Header />

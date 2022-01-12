@@ -20,27 +20,28 @@ const PublicRoute = ({
     <Route
       {...rest}
       render={(props) =>
-        isLogin() && restricted ? (
-          !isNotFound ? (
-            isPasien() ? (
-              <Redirect to="/pasien" />
-            ) : (
-              <Redirect to="/admin/antrian-pasien" />
-            )
-          ) : (
-            <>
-              <Redirect to="/error" />
-              <Component {...props} />
-            </>
-          )
-        ) : isNotFound ? (
-          <>
-            <Redirect to="/error" />
-            <Component {...props} />
-          </>
-        ) : (
-          <Component {...props} />
-        )
+        // isLogin() && restricted ? (
+        //   !isNotFound ? (
+        //     isPasien() ? (
+        //       <Redirect to="/pasien" />
+        //     ) : (
+        //       <Redirect to="/admin/antrian-pasien" />
+        //     )
+        //   ) : (
+        //     <>
+        //       <Redirect to="/error" />
+        //       <Component {...props} />
+        //     </>
+        //   )
+        // ) : isNotFound ? (
+        //   <>
+        //     <Redirect to="/error" />
+        //     <Component {...props} />
+        //   </>
+        // ) : (
+        //   <Component {...props} />
+        // )
+        <Component {...props} />
       }
     />
   );

@@ -47,3 +47,7 @@ code {
 .breadcrumb-properties {
   border-radius: 50px;
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
