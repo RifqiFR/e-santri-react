@@ -220,16 +220,16 @@ class Sidebar extends React.Component {
               {/* Navigation */}
               <Nav className="mb-md-3" navbar>
                 <Row className="d-flex justify-content-center">
-                  {content.map(admin => (
-                    <Col key={admin.name} lg={12} md={12} sm={12} xs={12}>
+                  {content.map(menu => (
+                    <Col key={menu.name} lg={12} md={12} sm={12} xs={12}>
                       <NavItem>
                         <Link
                           className=" nav-link"
                           style={{ fontWeight: "600" }}
-                          to={admin.path}
+                          to={menu.path}
                         >
-                          {admin.icon}
-                          <NavLink>{admin.name}</NavLink>
+                          {menu.icon}
+                          <NavLink>{menu.name}</NavLink>
                         </Link>
                       </NavItem>
                     </Col>

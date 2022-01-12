@@ -9,14 +9,38 @@
   - Dashboard untuk admin & superadmin yang sudah login
 */
 import AdminContainer from "components/admin/AdminContainer";
+import SuperAdminContainer from "../components/super-admin/SuperAdminContainer";
 import ErrorPage from "../pages/404Pages/ErrorPage";
+// import Login from "../pages/Login";
 
 export const APP_ROUTE = [
+  // {
+  //   name: "Login",
+  //   path: "/login",
+  //   exact: true,
+  //   component: Login,
+  //   restricted: true,
+  // },
+  // {
+  //   name: "Login",
+  //   path: "/",
+  //   exact: true,
+  //   component: Login,
+  //   restricted: true,
+  // },
   {
     name: "Admin Dashboard",
     path: "/admin",
     // exact: true, //di false karena ada nested Switch di dalamnya AdminCOntainer
     component: AdminContainer,
+    private: false,
+    isAdmin: true,
+  },
+  {
+    name: "Super Admin Dashboard",
+    path: "/super-admin",
+    // exact: true, //di false karena ada nested Switch di dalamnya AdminCOntainer
+    component: SuperAdminContainer,
     private: false,
     isAdmin: true,
   },
