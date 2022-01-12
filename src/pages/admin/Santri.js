@@ -33,32 +33,30 @@ const DUMMY_SANTRI = [
 const Santri = (props) => {
   return (
     <>
-      <Form>
-        <div className="d-flex justify-content-between">
-          <div className="flex-grow-1">
-            <FormGroup row>
-              <Label sm={2} htmlFor="pendidikan" className="pr-3 mb-0">Pendidikan:</Label>
-              <div sm={10}>
-                <Input name="pendidikan" id="pendidikan" type="select">
-                  <option value="sma">SMA</option>
-                  <option value="smp">SMP</option>
-                </Input>
-              </div>
-            </FormGroup>
-        
-            <FormGroup row>
-              <Label sm={2} htmlFor="pendidikan" className="pr-3 mb-0">Angkatan:</Label>
-              <div sm={10}>
-                <Input name="angkatan" id="angkatan" type="select">
-                  <option value="2020">2020</option>
-                  <option value="2021">2021</option>
-                </Input>
-              </div>
-            </FormGroup>
-          </div>
-          <Button color="secondary" className="h-25">Tambah data</Button>
-        </div>
-      </Form>
+      <div className="d-flex justify-content-between">
+        <Form className="flex-grow-1">
+          <FormGroup row>
+            <Label sm={2} htmlFor="pendidikan" className="pr-3 mb-0">Pendidikan:</Label>
+            <div sm={10}>
+              <Input name="pendidikan" id="pendidikan" type="select">
+                <option value="sma">SMA</option>
+                <option value="smp">SMP</option>
+              </Input>
+            </div>
+          </FormGroup>
+      
+          <FormGroup row>
+            <Label sm={2} htmlFor="pendidikan" className="pr-3 mb-0">Angkatan:</Label>
+            <div sm={10}>
+              <Input name="angkatan" id="angkatan" type="select">
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+              </Input>
+            </div>
+          </FormGroup>
+        </Form>
+        <Link to="/admin/santri/create"><Button color="secondary">Tambah data</Button></Link>
+      </div>
       <div className="d-flex justify-content-center align-items-center">
         <Button color="success">Cari data</Button>
       </div>
