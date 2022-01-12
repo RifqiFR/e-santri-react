@@ -1,3 +1,4 @@
+import Index from "pages/admin/Index";
 import Dashboard from "pages/admin/Dashboard";
 import Santri from "../pages/admin/Santri";
 import SPP from "pages/admin/SPP";
@@ -9,6 +10,14 @@ import Pengaturan from "pages/admin/Pengaturan";
 import Notifikasi from "pages/admin/Notifikasi";
 
 export const APP_ADMIN_ROUTE = [
+  {
+    name: "Index",
+    path: "/admin",
+    exact: true,
+    component: Index,
+    // private: true,
+    // isAdmin: true,
+  },
   {
     name: "Dashboard",
     path: "/admin/dashboard",
