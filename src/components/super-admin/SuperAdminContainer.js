@@ -27,8 +27,8 @@ const SuperAdminContainer = (props) => {
         {...props}
         logo={{
           innerLink: "/",
-          imgSrc: require("images/pasien/logo.png"),
-          imgAlt: "...",
+          imgSrc: require("images/logo.png"),
+          imgAlt: "logo",
         }}
         content={SUPERADMIN_SIDEBAR_CONTENT}
       />
