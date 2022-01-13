@@ -97,3 +97,16 @@ export const SEX = [
     label: 'Perempuan',
   },
 ];
+
+export const CREDENTIALS = [
+  {
+    email: 'admin@gmail.com',
+    password: '12345678',
+    role: 'ADMIN'
+  },
+  {
+    email: 'superadmin@gmail.com',
+    password: '12345678',
+    role: 'SUPER_ADMIN'
+  },
+]

@@ -9,6 +9,7 @@
   - Dashboard untuk admin & superadmin yang sudah login
 */
 import AdminContainer from "components/admin/AdminContainer";
+import Home from "pages/Home";
 import Login from "pages/Login";
 import SuperAdminContainer from "../components/super-admin/SuperAdminContainer";
 import ErrorPage from "../pages/404Pages/ErrorPage";
@@ -22,13 +23,13 @@ export const APP_ROUTE = [
     component: Login,
     restricted: true,
   },
-  // {
-  //   name: "Login",
-  //   path: "/",
-  //   exact: true,
-  //   component: Login,
-  //   restricted: true,
-  // },
+  {
+    name: "Home",
+    path: "/",
+    exact: true,
+    component: Home,
+    restricted: true,
+  },
   {
     name: "Admin Dashboard",
     path: "/admin",
