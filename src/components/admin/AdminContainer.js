@@ -26,7 +26,7 @@ const AdminContainer = (props) => {
         {...props}
         logo={{
           innerLink: "/",
-          imgSrc: require("images/pasien/logo.png"),
+          imgSrc: require("images/logo.png"),
           imgAlt: "...",
         }}
         content={ADMIN_SIDEBAR_CONTENT}

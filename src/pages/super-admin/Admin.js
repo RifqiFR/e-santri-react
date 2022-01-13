@@ -1,4 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import { Link } from "react-router-dom";
 import { Input, Label, Table, FormGroup, Form, Button } from "reactstrap";
 
@@ -52,15 +54,50 @@ const DUMMY_ADMIN = [
 
 const Admin = (props) => {
   const [lastPath, setLastPath] = React.useState("");
+  const [admins, setAdmins] = useState([]);
+  const deleteSwal = withReactContent(Swal);
 
   React.useEffect(() => {
     if(localStorage.getItem('data_admin') == null) {
       localStorage.setItem('data_admin', JSON.stringify(DUMMY_ADMIN))
+      setAdmins(DUMMY_ADMIN)
+    } else {
+      setAdmins(JSON.parse(localStorage.getItem('data_admin')))
     }
+
     let splittedPath = window.location.pathname.split("/");
     setLastPath(splittedPath[splittedPath.length - 1])
-    console.log(localStorage.getItem('data_admin'))
-  }, [lastPath, localStorage.getItem('data_admin')]);
+  }, []);
+
+  const deleteHandler = (id) => {
+    let currentAdminObject = admins.find(obj => {
+      return obj.id === parseInt(id)
+    })
+
+    deleteSwal.fire({
+      title: "Konfirmasi hapus data Admin",
+      text: `Yakin akan menghapus santri ${currentAdminObject.name} ?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: 'Hapus',
+      confirmButtonColor: '#eb0000'
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        console.log(currentAdminObject)
+        // delete Admin by id
+        let resultAdmminArray = admins.filter(function( obj ) {
+          return obj.id !== id;
+        });
+        setAdmins(resultAdmminArray)
+        localStorage.setItem('data_admin', JSON.stringify(resultAdmminArray))
+
+        Swal.fire('Berhasil!', 'Data Admin berhasil dihapus !', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('Data Admin tidak terhapus', '', 'info')
+      }
+    });
+  };
 
   return (
     <>
@@ -101,7 +138,7 @@ const Admin = (props) => {
           </tr>
         </thead>
         <tbody>
-          {localStorage.getItem('data_admin') == null ? (
+          {admins.length == 0 ? (
               DUMMY_ADMIN.map((s, i) => (
                 <tr key={s.id}>
                   <th scope="row" className="align-middle">
@@ -118,13 +155,13 @@ const Admin = (props) => {
                   </td>
                   <td className="d-flex justify-content-center">
                     <Link to={'/super-admin/admin-smp/'+s.id} className="mr-2"><Button color="warning">Lihat</Button></Link>
-                    <Button color="danger">Hapus</Button>
+                    <Button onClick={deleteHandler.bind(null, s.id)} color="danger">Hapus</Button>
                   </td>
                 </tr>
               ))
             ) :
             (
-              JSON.parse(localStorage.getItem('data_admin')).map((s, i) => (
+              admins.map((s, i) => (
                 <tr key={s.id}>
                   <th scope="row" className="align-middle">
                     {i + 1}
@@ -140,7 +177,7 @@ const Admin = (props) => {
                   </td>
                   <td className="d-flex justify-content-center">
                     <Link to={'/super-admin/admin-smp/'+s.id} className="mr-2"><Button color="warning">Lihat</Button></Link>
-                    <Button color="danger">Hapus</Button>
+                    <Button onClick={deleteHandler.bind(null, s.id)} color="danger">Hapus</Button>
                   </td>
                 </tr>
               ))
