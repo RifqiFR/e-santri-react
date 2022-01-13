@@ -81,7 +81,7 @@ const Admin = (props) => {
     deleteSwal.fire({
       title: "Konfirmasi hapus data Admin",
       text: `Yakin akan menghapus santri ${currentAdminObject.name} ?`,
-      icon: "warning",
+      icon: "question",
       showCancelButton: true,
       confirmButtonText: 'Hapus',
       confirmButtonColor: '#eb0000'
