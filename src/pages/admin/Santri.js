@@ -1,36 +1,52 @@
-import React from "react";
+import { SANTRI } from "constants/local_storage_keys";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Input, Label, Table, FormGroup, Form, Button } from "reactstrap";
+import { ANGKATAN, SANTRI as DUMMY_SANTRI } from "../../constants/dummies"
 
-const DUMMY_SANTRI = [
-  {
-    id: 1,
-    name: "Rifqi Fajar Ramdhani",
-    sex: "L",
-  },
-  {
-    id: 2,
-    name: "Affan Abiyyu",
-    sex: "L",
-  },
-  {
-    id: 3,
-    name: "M. Fahreza Ansori",
-    sex: "L",
-  },
-  {
-    id: 4,
-    name: "Dary Winata Nugraha",
-    sex: "L",
-  },
-  {
-    id: 5,
-    name: "Praditya Nafis M.",
-    sex: "L",
-  },
-];
+const Santri = () => {
+  const [santri, setSantri] = useState([]);
+  const [displayedSantri, setDisplayedSantri] = useState([]);
+  const [filterPendidikan, setFilterPendidikan] = useState('SMA');
+  const [filterAngkatan, setFilterAngkatan] = useState(2020);
 
-const Santri = (props) => {
+  useEffect(() => {
+    // parsing additional data from local storage
+    const additionalDataStr = localStorage.getItem(SANTRI);
+    let additionalData = [];
+
+    if (additionalDataStr) {
+      additionalData = JSON.parse(additionalDataStr);
+    }
+
+    setSantri([
+      ...DUMMY_SANTRI,
+      ...additionalData
+    ]);
+    setDisplayedSantri([
+      ...DUMMY_SANTRI,
+      ...additionalData
+    ]);
+
+  }, []);
+
+  const deleteHandler = (id) => {
+    setSantri((prev) => prev.filter(p => p.id !== id));
+    setDisplayedSantri((prev) => prev.filter(p => p.id !== id));
+    // deleting from local storage
+    const santriStr = localStorage.getItem(SANTRI);
+    const data = santriStr ? JSON.parse(santriStr) : [];
+
+    const filtered = data.filter(d => d.id !== id);
+
+    localStorage.setItem(SANTRI, JSON.stringify(filtered));
+  };
+
+  const filterDataHandler = () => {
+    console.log(santri);
+    setDisplayedSantri(santri.filter(s => +s.angkatan === +filterAngkatan && s.pendidikan === filterPendidikan));
+  }
+
   return (
     <>
       <div className="d-flex justify-content-between">
@@ -38,19 +54,19 @@ const Santri = (props) => {
           <FormGroup row>
             <Label sm={2} htmlFor="pendidikan" className="pr-3 mb-0">Pendidikan:</Label>
             <div sm={10}>
-              <Input name="pendidikan" id="pendidikan" type="select">
-                <option value="sma">SMA</option>
-                <option value="smp">SMP</option>
+              <Input name="pendidikan" id="pendidikan" type="select" onChange={(event) => setFilterPendidikan(event.target.value)} value={filterPendidikan}>
+                <option value="SMA">SMA</option>
+                <option value="SMP">SMP</option>
               </Input>
             </div>
           </FormGroup>
-      
           <FormGroup row>
             <Label sm={2} htmlFor="pendidikan" className="pr-3 mb-0">Angkatan:</Label>
             <div sm={10}>
-              <Input name="angkatan" id="angkatan" type="select">
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
+              <Input name="angkatan" id="angkatan" type="select" onChange={(event) => setFilterAngkatan(event.target.value)} value={filterAngkatan}>
+                {ANGKATAN.map(a => (
+                  <option value={a}>{a}</option>
+                ))}
               </Input>
             </div>
           </FormGroup>
@@ -58,7 +74,7 @@ const Santri = (props) => {
         <Link to="/admin/santri/create"><Button color="secondary">Tambah data</Button></Link>
       </div>
       <div className="d-flex justify-content-center align-items-center">
-        <Button color="success">Cari data</Button>
+        <Button color="success" onClick={filterDataHandler}>Cari data</Button>
       </div>
       <hr />
       <p className="text-center mb-0">Data Santri SMA Pondok Pesantren Tambak Beras Jombang</p>
@@ -81,20 +97,21 @@ const Santri = (props) => {
           </tr>
         </thead>
         <tbody>
-          {DUMMY_SANTRI.map((s, i) => (
+          {displayedSantri.map((s, i) => (
             <tr key={s.name}>
               <th scope="row" className="align-middle">
                 {i + 1}
               </th>
               <td className="align-middle">
-                {s.name}
+                {s.nama}
               </td>
               <td className="align-middle">
                 {s.sex}
               </td>
               <td className="d-flex justify-content-center">
-                <Link to="/admin/santri/123" className="mr-2"><Button color="warning">Lihat</Button></Link>
-                <Button color="danger">Hapus</Button>
+                <Link to={`/admin/santri/${s.id}`} className="mr-2"><Button color="warning">Lihat</Button></Link>
+                <Link to={`/admin/santri/${s.id}/edit`} className="mr-2"><Button color="info">Edit</Button></Link>
+                <Button color="danger" onClick={deleteHandler.bind(null, s.id)}>Hapus</Button>
               </td>
             </tr>
           ))}
