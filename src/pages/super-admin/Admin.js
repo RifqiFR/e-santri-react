@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { Link } from "react-router-dom";
 import { Input, Label, Table, FormGroup, Form, Button } from "reactstrap";
+import {SANTRI} from "../../constants/local_storage_keys";
 
 const DUMMY_ADMIN = [
   {
@@ -58,16 +59,19 @@ const Admin = (props) => {
   const deleteSwal = withReactContent(Swal);
 
   React.useEffect(() => {
+    fetchDataAdmins()
+    let splittedPath = window.location.pathname.split("/");
+    setLastPath(splittedPath[splittedPath.length - 1])
+  }, []);
+
+  const fetchDataAdmins = () => {
     if(localStorage.getItem('data_admin') == null) {
       localStorage.setItem('data_admin', JSON.stringify(DUMMY_ADMIN))
       setAdmins(DUMMY_ADMIN)
     } else {
       setAdmins(JSON.parse(localStorage.getItem('data_admin')))
     }
-
-    let splittedPath = window.location.pathname.split("/");
-    setLastPath(splittedPath[splittedPath.length - 1])
-  }, []);
+  };
 
   const deleteHandler = (id) => {
     let currentAdminObject = admins.find(obj => {

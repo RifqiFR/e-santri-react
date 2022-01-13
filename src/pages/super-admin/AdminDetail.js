@@ -21,13 +21,17 @@ const SantriDetail = (props) => {
   let { id } = useParams();
 
     React.useEffect(() => {
-        setCurrentIdAdmin(window.location.pathname)
-        // setCurrentAdmin(JSON.parse(localStorage.getItem('data_admin'))[id])
-        let currentAdminObject = JSON.parse(localStorage.getItem('data_admin')).find(obj => {
-            return obj.id === parseInt(id)
-        })
-        setCurrentAdmin(currentAdminObject)
+        fetchDataAdmin()
     }, [currentIdAdmin]);
+
+  const fetchDataAdmin = () => {
+      setCurrentIdAdmin(window.location.pathname)
+      // setCurrentAdmin(JSON.parse(localStorage.getItem('data_admin'))[id])
+      let currentAdminObject = JSON.parse(localStorage.getItem('data_admin')).find(obj => {
+          return obj.id === parseInt(id)
+      })
+      setCurrentAdmin(currentAdminObject)
+  }
 
   const goBack = () => {
     history.goBack()
