@@ -1,36 +1,21 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Input, Label, Table, FormGroup, Form, Button } from "reactstrap";
-
-const DUMMY_SANTRI = [
-  {
-    id: 1,
-    name: "Rifqi Fajar Ramdhani",
-    sex: "L",
-  },
-  {
-    id: 2,
-    name: "Affan Abiyyu",
-    sex: "L",
-  },
-  {
-    id: 3,
-    name: "M. Fahreza Ansori",
-    sex: "L",
-  },
-  {
-    id: 4,
-    name: "Dary Winata Nugraha",
-    sex: "L",
-  },
-  {
-    id: 5,
-    name: "Praditya Nafis M.",
-    sex: "L",
-  },
-];
+import { SANTRI } from "constants/local_storage_keys";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { Table, Button } from "reactstrap";
 
 const SantriDetail = (props) => {
+  const { id: santriId } = useParams();
+  const [santri, setSantri] = useState(null);
+
+  useEffect(() => {
+    const str = localStorage.getItem(SANTRI);
+    const data = str ? JSON.parse(str) : [];
+
+    const santri = data.find(d => d.id === +santriId);
+
+    setSantri(santri);
+  }, [santriId])
+
   return (
     <div>
       <img src={require('../../images/avatar.png')} alt="" className="w-25 mx-auto d-block" />
@@ -40,43 +25,43 @@ const SantriDetail = (props) => {
       <Table bordered className="mb-2">
         <tr>
           <td>Nama Santri</td>
-          <td>Rifqi Fajar Ramdhani</td>
+          <td>{santri?.nama}</td>
         </tr>
         <tr>
           <td>Nomor Induk</td>
-          <td>2102109210</td>
+          <td>{santri?.noInduk}</td>
         </tr>
         <tr>
           <td>Alamat Santri</td>
-          <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam, saepe?</td>
+          <td>{santri?.alamat}</td>
         </tr>
         <tr>
           <td>Jenis Kelamin</td>
-          <td>Laki-laki</td>
+          <td>{santri?.sex}</td>
         </tr>
         <tr>
           <td>Tempat, Tanggal Lahir</td>
-          <td>Kediri, 17 Januari 2006</td>
+          <td>{santri?.tempatLahir}, {santri?.tanggalLahir}</td>
         </tr>
         <tr>
           <td>Nama Orang Tua</td>
-          <td>Lorem, ipsum dolor.</td>
+          <td>{santri?.namaOrangTua}</td>
         </tr>
         <tr>
           <td>Nomor HP Orang Tua</td>
-          <td>08213293232</td>
+          <td>{santri?.nomorOrangTua}</td>
         </tr>
         <tr>
           <td>Email Orang Tua</td>
-          <td>maoiqwodkqokwoq@gmail.com</td>
+          <td>{santri?.emailOrangTua}</td>
         </tr>
         <tr>
           <td>Alamat Orang Tua</td>
-          <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque, natus.</td>
+          <td>{santri?.alamatOrangTua}</td>
         </tr>
         <tr>
           <td>Angkatan Santri</td>
-          <td>2020</td>
+          <td>{santri?.angkatan}</td>
         </tr>
         <tr>
           <td>Transaksi Santri</td>
@@ -84,7 +69,7 @@ const SantriDetail = (props) => {
         </tr>
       </Table>
       <div className="d-flex justify-content-between">
-        <Button color="secondary">Ubah data</Button>
+        <Link to={`/admin/santri/${santriId}/edit`}><Button color="secondary">Ubah data</Button></Link>
         <Link to="/admin/santri"><Button color="success">Kembali</Button></Link>
       </div>
     </div>

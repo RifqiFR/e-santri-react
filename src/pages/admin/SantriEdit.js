@@ -1,9 +1,11 @@
+import { ANGKATAN } from "constants/dummies";
 import { SANTRI } from "constants/local_storage_keys";
-import React, { useState } from "react";
-import { useHistory } from "react-router";
+import React, { useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router";
 import { Input, Label, FormGroup, Form, Button, Col } from "reactstrap";
 
-const SantriForm = (props) => {
+const SantriEdit = (props) => {
+  const { id: santriId } = useParams();
   const history = useHistory();
   const [nama, setNama] = useState('');
   const [noInduk, setNoInduk] = useState('');
@@ -11,7 +13,7 @@ const SantriForm = (props) => {
   const [sex, setSex] = useState('L');
   const [tempatLahir, setTempatLahir] = useState('');
   const [tanggalLahir, setTanggalLahir] = useState('');
-  const [angkatan, setAngkatan] = useState('');
+  const [angkatan, setAngkatan] = useState('2021');
   const [namaOrtu, setNamaOrtu] = useState('');
   const [statusOrtu, setStatusOrtu] = useState('ayah');
   const [nomorOrtu, setNomorOrtu] = useState('');
@@ -21,15 +23,7 @@ const SantriForm = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const current = localStorage.getItem(SANTRI);
-    let data = [];
-
-    if (current) {
-      data = JSON.parse(current);
-    }
-
-    data.push({
-      id: Math.floor(Math.random() * 10001),
+    console.log({
       nama,
       noInduk,
       alamat,
@@ -41,13 +35,56 @@ const SantriForm = (props) => {
       statusOrtu,
       nomorOrtu,
       emailOrtu,
-      alamatOrtu,
-      pendidikan: "SMA", // dummy purpose
+      alamatOrtu
+    });
+
+    const current = localStorage.getItem(SANTRI);
+    let data = JSON.parse(current);
+
+    data = data.map(d => {
+      if (d.id === +santriId) {
+        return {
+          ...d,
+          nama,
+          noInduk,
+          alamat,
+          sex,
+          tempatLahir,
+          tanggalLahir,
+          angkatan,
+          namaOrtu,
+          statusOrtu,
+          nomorOrtu,
+          emailOrtu,
+          alamatOrtu
+        }
+      }
+
+      return d;      
     });
     
     localStorage.setItem(SANTRI, JSON.stringify(data));
     history.push('/admin/santri');
-  }
+  };
+
+  useEffect(() => {
+    const str = localStorage.getItem(SANTRI);
+    const data = JSON.parse(str);
+
+    const santri = data.find(s => s.id === +santriId);
+
+    setNama(santri.nama);
+    setNoInduk(santri.noInduk);
+    setAlamat(santri.alamat);
+    setSex(santri.sex);
+    setTempatLahir(santri.tempatLahir);
+    setAngkatan(santri.angkatan);
+    setNamaOrtu(santri.namaOrtu);
+    setStatusOrtu(santri.statusOrtu);
+    setNomorOrtu(santri.nomorOrtu);
+    setEmailOrtu(santri.emailOrtu);
+    setAlamatOrtu(santri.alamatOrtu);
+  }, [santriId]);
 
   return (
     <>
@@ -100,8 +137,9 @@ const SantriForm = (props) => {
           <Label sm={2} htmlFor="angkatan" className="pr-3 mb-0">Angkatan:</Label>
           <Col sm={10}>
             <Input name="angkatan" id="angkatan" type="select" onChange={event => setAngkatan(event.target.value)} value={angkatan}>
-              <option value="2020">2020</option>
-              <option value="2021">2021</option>
+              {ANGKATAN.map(a => (
+                <option value={a}>{a}</option>
+              ))}
             </Input>
           </Col>
         </FormGroup>
@@ -146,4 +184,4 @@ const SantriForm = (props) => {
   );
 };
 
-export default SantriForm;
+export default SantriEdit;

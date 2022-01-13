@@ -8,6 +8,7 @@ import KartuSantri from "pages/admin/KartuSantri";
 import KartuSantriCetak from "pages/admin/KartuSantriCetak";
 import Pengaturan from "pages/admin/Pengaturan";
 import Notifikasi from "pages/admin/Notifikasi";
+import SantriEdit from "pages/admin/SantriEdit";
 
 export const APP_ADMIN_ROUTE = [
   {
@@ -39,6 +40,14 @@ export const APP_ADMIN_ROUTE = [
     path: "/admin/santri/create",
     exact: true,
     component: SantriForm,
+    // private: true,
+    // isAdmin: true,
+  },
+  {
+    name: "Santri",
+    path: "/admin/santri/:id/edit",
+    exact: true,
+    component: SantriEdit,
     // private: true,
     // isAdmin: true,
   },
