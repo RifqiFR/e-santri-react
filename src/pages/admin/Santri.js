@@ -2,6 +2,8 @@ import { SANTRI } from "constants/local_storage_keys";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Input, Label, Table, FormGroup, Form, Button } from "reactstrap";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import { ANGKATAN, SANTRI as DUMMY_SANTRI } from "../../constants/dummies"
 
 const Santri = () => {
@@ -9,6 +11,7 @@ const Santri = () => {
   const [displayedSantri, setDisplayedSantri] = useState([]);
   const [filterPendidikan, setFilterPendidikan] = useState('SMA');
   const [filterAngkatan, setFilterAngkatan] = useState(2020);
+  const deleteSwal = withReactContent(Swal);
 
   useEffect(() => {
     // parsing additional data from local storage
@@ -31,15 +34,34 @@ const Santri = () => {
   }, []);
 
   const deleteHandler = (id) => {
-    setSantri((prev) => prev.filter(p => p.id !== id));
-    setDisplayedSantri((prev) => prev.filter(p => p.id !== id));
-    // deleting from local storage
-    const santriStr = localStorage.getItem(SANTRI);
-    const data = santriStr ? JSON.parse(santriStr) : [];
+    const currentSantri = santri.find(s => +s.id === +id);
 
-    const filtered = data.filter(d => d.id !== id);
+    if (currentSantri) {
+      deleteSwal.fire({
+        title: "Konfirmasi hapus data Santri",
+        text: `Yakin akan menghapus santri ${currentSantri.nama} ?`,
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: 'Hapus',
+        confirmButtonColor: '#eb0000'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setSantri((prev) => prev.filter(p => p.id !== id));
+          setDisplayedSantri((prev) => prev.filter(p => p.id !== id));
+          // deleting from local storage
+          const santriStr = localStorage.getItem(SANTRI);
+          const data = santriStr ? JSON.parse(santriStr) : [];
 
-    localStorage.setItem(SANTRI, JSON.stringify(filtered));
+          const filtered = data.filter(d => d.id !== id);
+
+          localStorage.setItem(SANTRI, JSON.stringify(filtered));
+
+          Swal.fire('Berhasil!', 'Data Santri berhasil dihapus !', 'success');
+        } else if (result.isDenied) {
+          Swal.fire('Data Santri tidak terhapus', '', 'info');
+        }
+      })
+    }
   };
 
   const filterDataHandler = () => {
