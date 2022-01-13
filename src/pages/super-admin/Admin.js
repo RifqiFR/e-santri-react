@@ -7,31 +7,46 @@ const DUMMY_ADMIN = [
     id: 1,
     name: "Kamila Nur Laila",
     nip: "199920013811",
-    email: "Kamila@gmail.com"
+    email: "Kamila@gmail.com",
+    gender: "P",
+    password: "password",
+    statusAdmin: "smp"
   },
   {
     id: 2,
     name: "Yusuf Anmar Abqari",
     nip: "199920013822",
-    email: "Yusuf@gmail.com"
+    email: "Yusuf@gmail.com",
+    gender: "L",
+    password: "password",
+    statusAdmin: "sma"
   },
   {
     id: 3,
     name: "Zahra Ramadhani",
     nip: "199920013833",
-    email: "Zahra@gmail.com"
+    email: "Zahra@gmail.com",
+    gender: "P",
+    password: "password",
+    statusAdmin: "sma"
   },
   {
     id: 4,
     name: "Ahmad Dzulrkarnain",
     nip: "199920013844",
-    email: "Ahmad@gmail.com"
+    email: "Ahmad@gmail.com",
+    gender: "L",
+    password: "password",
+    statusAdmin: "merchant"
   },
   {
     id: 5,
     name: "Nama lainnya",
     nip: "199920013855",
-    email: "Nama@gmail.com"
+    email: "Nama@gmail.com",
+    gender: "L",
+    password: "password",
+    statusAdmin: "bendahara"
   },
 ];
 
@@ -65,7 +80,7 @@ const Admin = (props) => {
           <Button color="secondary">Cari</Button>
         </Form>
       </div>
-      <Table bordered>
+      <Table responsive bordered>
         <thead>
           <tr>
             <th>
