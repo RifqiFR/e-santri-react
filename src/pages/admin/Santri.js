@@ -65,7 +65,6 @@ const Santri = () => {
   };
 
   const filterDataHandler = () => {
-    console.log(santri);
     setDisplayedSantri(santri.filter(s => +s.angkatan === +filterAngkatan && s.pendidikan === filterPendidikan));
   }
 
