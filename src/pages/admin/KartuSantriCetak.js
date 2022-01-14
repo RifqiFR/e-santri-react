@@ -1,37 +1,16 @@
 import React from "react";
 import { Input, Label, Table, FormGroup, Form, Button } from "reactstrap";
 
-const DUMMY_SANTRI = [
-  {
-    id: 1,
-    name: "Rifqi Fajar Ramdhani",
-    sex: "L",
-  },
-  {
-    id: 2,
-    name: "Affan Abiyyu",
-    sex: "L",
-  },
-  {
-    id: 3,
-    name: "M. Fahreza Ansori",
-    sex: "L",
-  },
-  {
-    id: 4,
-    name: "Dary Winata Nugraha",
-    sex: "L",
-  },
-  {
-    id: 5,
-    name: "Praditya Nafis M.",
-    sex: "L",
-  },
-];
-
 const KartuSantriCetak = (props) => {
   return (
-    <img className="w-100" src={require('../../images/kartu_santri.png')} alt="kartu_santri" />
+    <>
+      <img className="w-100" src={require('../../images/kartu_santri.png')} alt="kartu_santri" />
+      <div className="d-flex align-items-center my-3">
+        <p className="mb-0 mr-2">Pin: </p>
+        <p className="mb-0 border py-2 px-3 rounded">746694</p>
+      </div>
+      <Button className="d-block mx-auto px-3" color="danger">Cetak</Button>
+    </>
   );
 };
 

@@ -98,7 +98,7 @@ const KartuSantri = () => {
         </thead>
         <tbody>
           {displayedSantri.map((s, i) => (
-            <tr key={s.name}>
+            <tr key={s.id}>
               <th scope="row" className="align-middle">
                 {i + 1}
               </th>
@@ -109,7 +109,7 @@ const KartuSantri = () => {
                 {s.sex}
               </td>
               <td className="d-flex justify-content-center">
-                <Link to="/admin/kartusantri/123/cetak"><Button color="danger">Cetak Kartu</Button></Link>
+                <Link to={`/admin/kartusantri/${s.id}/cetak`}><Button color="danger">Cetak Kartu</Button></Link>
               </td>
             </tr>
           ))}
