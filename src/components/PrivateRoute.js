@@ -5,7 +5,7 @@
 
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { isLogin, isPasien } from "utils/auth";
+import { isLogin, isSantri } from "utils/auth";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   console.log(Component);
@@ -16,7 +16,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) =>
         isLogin() ? (
-          isPasien() ? (
+          isSantri() ? (
             <>
               <Component {...props} />
               <Redirect to="/pasien" />

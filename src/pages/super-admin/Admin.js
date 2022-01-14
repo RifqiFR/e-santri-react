@@ -2,8 +2,14 @@ import React, {useState} from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { Link } from "react-router-dom";
+import { setUserLogin } from "utils/auth";
 import { Input, Label, Table, FormGroup, Form, Button } from "reactstrap";
-import {SANTRI} from "../../constants/local_storage_keys";
+import axios from "axios";
+import {
+  DELETE_NEW_ADMIN, GET_ADMIN_MERCHANT,
+  GET_ADMIN_SANTRI, GET_BENDAHARA,
+  JWT_HEADER
+} from "../../constants/urls";
 
 const DUMMY_ADMIN = [
   {
@@ -59,12 +65,35 @@ const Admin = (props) => {
   const deleteSwal = withReactContent(Swal);
 
   React.useEffect(() => {
-    fetchDataAdmins()
-    let splittedPath = window.location.pathname.split("/");
-    setLastPath(splittedPath[splittedPath.length - 1])
+    fetchDataByRolePath()
   }, []);
 
-  const fetchDataAdmins = () => {
+  const fetchDataByRolePath = async () => {
+    let splittedPath = window.location.pathname.split("/");
+    let currentAdminPath = splittedPath[splittedPath.length - 1]
+    setLastPath(currentAdminPath)
+    if (currentAdminPath === 'admin-smp' || currentAdminPath === 'admin-sma') {
+      fetchDataAdmins(GET_ADMIN_SANTRI)
+    } else if (currentAdminPath === 'admin-merchant') {
+      fetchDataAdmins(GET_ADMIN_MERCHANT)
+    } else if (currentAdminPath === 'bendahara') {
+      fetchDataAdmins(GET_BENDAHARA)
+    }
+  };
+
+  const fetchDataAdmins = async (functionGetData) => {
+    await axios
+      .get(functionGetData(), {
+        headers: { Authorization: `Bearer ${JWT_HEADER}` },
+      })
+      .then((res) => {
+        setAdmins(res.data.data)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const fetchDataAdminsDummy = async () => {
     if(localStorage.getItem('data_admin') == null) {
       localStorage.setItem('data_admin', JSON.stringify(DUMMY_ADMIN))
       setAdmins(DUMMY_ADMIN)
@@ -80,7 +109,7 @@ const Admin = (props) => {
 
     deleteSwal.fire({
       title: "Konfirmasi hapus data Admin",
-      text: `Yakin akan menghapus santri ${currentAdminObject.name} ?`,
+      text: `Yakin akan menghapus Admin ini ?`,
       icon: "question",
       showCancelButton: true,
       confirmButtonText: 'Hapus',
@@ -90,13 +119,24 @@ const Admin = (props) => {
       if (result.isConfirmed) {
         console.log(currentAdminObject)
         // delete Admin by id
-        let resultAdmminArray = admins.filter(function( obj ) {
-          return obj.id !== id;
-        });
-        setAdmins(resultAdmminArray)
-        localStorage.setItem('data_admin', JSON.stringify(resultAdmminArray))
+        axios
+          .delete(DELETE_NEW_ADMIN(id), {
+            headers: { Authorization: `Bearer ${JWT_HEADER}` },
+          })
+          .then((res) => {
+            Swal.fire('Berhasil!', 'Data Admin berhasil dihapus !', 'success')
+            fetchDataByRolePath()
+          })
+          .catch((err) => {
+            console.log(err);
+          });
 
-        Swal.fire('Berhasil!', 'Data Admin berhasil dihapus !', 'success')
+        // let resultAdmminArray = admins.filter(function( obj ) {
+        //   return obj.id !== id;
+        // });
+        // setAdmins(resultAdmminArray)
+        // localStorage.setItem('data_admin', JSON.stringify(resultAdmminArray))
+        // Swal.fire('Berhasil!', 'Data Admin berhasil dihapus !', 'success')
       } else if (result.isDenied) {
         Swal.fire('Data Admin tidak terhapus', '', 'info')
       }
@@ -142,50 +182,32 @@ const Admin = (props) => {
           </tr>
         </thead>
         <tbody>
-          {admins.length == 0 ? (
-              DUMMY_ADMIN.map((s, i) => (
-                <tr key={s.id}>
-                  <th scope="row" className="align-middle">
-                    {i + 1}
-                  </th>
-                  <td className="align-middle">
-                    {s.name}
-                  </td>
-                  <td className="align-middle">
-                    {s.nip}
-                  </td>
-                  <td className="align-middle">
-                    {s.email}
-                  </td>
-                  <td className="d-flex justify-content-center">
-                    <Link to={'/super-admin/admin-smp/'+s.id} className="mr-2"><Button color="warning">Lihat</Button></Link>
-                    <Button onClick={deleteHandler.bind(null, s.id)} color="danger">Hapus</Button>
-                  </td>
-                </tr>
-              ))
-            ) :
-            (
-              admins.map((s, i) => (
-                <tr key={s.id}>
-                  <th scope="row" className="align-middle">
-                    {i + 1}
-                  </th>
-                  <td className="align-middle">
-                    {s.name}
-                  </td>
-                  <td className="align-middle">
-                    {s.nip}
-                  </td>
-                  <td className="align-middle">
-                    {s.email}
-                  </td>
-                  <td className="d-flex justify-content-center">
-                    <Link to={'/super-admin/admin-smp/'+s.id} className="mr-2"><Button color="warning">Lihat</Button></Link>
-                    <Button onClick={deleteHandler.bind(null, s.id)} color="danger">Hapus</Button>
-                  </td>
-                </tr>
-              ))
-            )}
+          {admins.length > 0 && (
+            admins.map((s, i) => (
+              <tr key={s.id}>
+                <th scope="row" className="align-middle">
+                  {i + 1}
+                </th>
+                <td className="align-middle">
+                  {s.nama}
+                </td>
+                <td className="align-middle">
+                  {s.nip}
+                </td>
+                <td className="align-middle">
+                  {s.nama.replace(/\s+/g, '').toLowerCase()}@email.com
+                </td>
+                {/*<td className="align-middle">*/}
+                {/*  {s.email}*/}
+                {/*</td>*/}
+                <td className="d-flex justify-content-center">
+                  <Link to={'/super-admin/admin-smp/'+s.id} className="mr-2"><Button color="warning">Lihat</Button></Link>
+                  <Button onClick={deleteHandler.bind(null, s.id)} color="danger">Hapus</Button>
+                </td>
+              </tr>
+            ))
+          )
+        }
         </tbody>
       </Table>
     </>

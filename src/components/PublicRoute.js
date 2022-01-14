@@ -8,7 +8,7 @@
 
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { isLogin, isPasien } from "utils/auth";
+import { isLogin, isSantri } from "utils/auth";
 
 const PublicRoute = ({
   component: Component,

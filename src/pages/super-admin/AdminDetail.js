@@ -1,6 +1,8 @@
 import React from "react";
 import { useHistory, useParams } from "react-router";
 import {Input, Label, Table, FormGroup, Form, Button, Col} from "reactstrap";
+import axios from "axios";
+import {GET_ADMIN_SANTRI, GET_ADMIN_SANTRI_DETAIL, JWT_HEADER} from "../../constants/urls";
 
 const DUMMY_ADMIN_DETAIL = [
   {
@@ -22,15 +24,25 @@ const SantriDetail = (props) => {
 
     React.useEffect(() => {
         fetchDataAdmin()
-    }, [currentIdAdmin]);
+    }, []);
 
-  const fetchDataAdmin = () => {
+  const fetchDataAdmin = async () => {
       setCurrentIdAdmin(window.location.pathname)
       // setCurrentAdmin(JSON.parse(localStorage.getItem('data_admin'))[id])
-      let currentAdminObject = JSON.parse(localStorage.getItem('data_admin')).find(obj => {
-          return obj.id === parseInt(id)
-      })
-      setCurrentAdmin(currentAdminObject)
+      await axios
+          .get(GET_ADMIN_SANTRI_DETAIL(id), {
+              headers: { Authorization: `Bearer ${JWT_HEADER}` },
+          })
+          .then((res) => {
+              setCurrentAdmin(res.data.data)
+          })
+          .catch((err) => {
+              console.log(err);
+          });
+      // let currentAdminObject = JSON.parse(localStorage.getItem('data_admin')).find(obj => {
+      //     return obj.id === parseInt(id)
+      // })
+      // setCurrentAdmin(currentAdminObject)
   }
 
   const goBack = () => {
@@ -44,7 +56,7 @@ const SantriDetail = (props) => {
             <FormGroup row>
                 <Label sm={2} htmlFor="nama" className="pr-3 mb-0">Nama Admin:</Label>
                 <Col sm={10}>
-                    <Input name="nama" id="nama" type="text" value={currentAdmin && currentAdmin.name} readOnly={true} />
+                    <Input name="nama" id="nama" type="text" value={currentAdmin && currentAdmin.nama} readOnly={true} />
                 </Col>
             </FormGroup>
             <FormGroup row>
@@ -56,13 +68,14 @@ const SantriDetail = (props) => {
             <FormGroup row>
                 <Label sm={2} htmlFor="email" className="pr-3 mb-0">Email:</Label>
                 <Col sm={10}>
-                    <Input name="email" id="email" type="email" value={currentAdmin && currentAdmin.email} readOnly={true}/>
+                    <Input name="email" id="email" type="email" value={currentAdmin && currentAdmin.nama.replace(/\s+/g, '').toLowerCase()+'@email.com'} readOnly={true}/>
                 </Col>
             </FormGroup>
             <FormGroup row>
                 <Label sm={2} htmlFor="password" className="pr-3 mb-0">Password:</Label>
                 <Col sm={10}>
-                    <Input name="password" id="password" type="password" value={currentAdmin && currentAdmin.password} disabled={true} readOnly={true}/>
+                    {/*<Input name="password" id="password" type="password" value={currentAdmin && currentAdmin.password} disabled={true} readOnly={true}/>*/}
+                    <Input name="password" id="password" type="password" value={`password`} disabled={true} readOnly={true}/>
                 </Col>
             </FormGroup>
             <FormGroup row>
@@ -70,12 +83,12 @@ const SantriDetail = (props) => {
                 <Col sm={10}>
                     <Input name="jenis_kelamin" id="jenis_kelamin" type="select" readOnly={true}>
                         {
-                            (currentAdmin?.gender != null) &&
-                                (currentAdmin.gender == "L")
+                            (currentAdmin?.jenis_kelamin != null) &&
+                                (currentAdmin.jenis_kelamin.toLowerCase() == "perempuan")
                                 ?
-                                    <option value="L">Laki-laki</option>
-                                :
                                     <option value="P">Perempuan</option>
+                                :
+                                    <option value="L">Laki-laki</option>
                         }
                     </Input>
                 </Col>

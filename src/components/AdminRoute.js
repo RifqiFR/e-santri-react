@@ -5,7 +5,7 @@
 
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { isLogin, isAdmin } from "utils/auth";
+import { isLogin, isAdminSantri } from "utils/auth";
 
 const AdminRoute = ({ component: Component, setTitle, setPath, ...rest }) => {
   React.useEffect(() => {

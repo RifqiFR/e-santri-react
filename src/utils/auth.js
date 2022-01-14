@@ -24,20 +24,32 @@ export const isLogin = () => {
   return false;
 };
 
-export const isPasien = () => {
-  if (Cookies.getJSON("USER")?.role === "Pasien") {
+export const isSantri = () => {
+  if (Cookies.getJSON("USER")?.role === "santri") {
     return true;
   }
   return false;
 };
-export const isAdmin = () => {
-  if (Cookies.getJSON("USER")?.role === "Admin") {
+export const isAdminSantri = () => {
+  if (Cookies.getJSON("USER")?.role === "admin_santri") {
+    return true;
+  }
+  return false;
+};
+export const isAdminMerchant = () => {
+  if (Cookies.getJSON("USER")?.role === "admin_merchant") {
+    return true;
+  }
+  return false;
+};
+export const isBendahara = () => {
+  if (Cookies.getJSON("USER")?.role === "bendahara") {
     return true;
   }
   return false;
 };
 export const isSuperAdmin = () => {
-  if (Cookies.getJSON("USER")?.role === "Super Admin") {
+  if (Cookies.getJSON("USER")?.role === "super_admin") {
     return true;
   }
   return false;

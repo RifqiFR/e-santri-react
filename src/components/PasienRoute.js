@@ -5,7 +5,7 @@
 
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { isLogin, isPasien, isAdmin } from "utils/auth";
+import { isLogin, isSantri, isAdminSantri } from "utils/auth";
 
 const PasienRoute = ({ component: Component, setTitle, ...rest }) => {
   React.useEffect(() => {
@@ -20,7 +20,7 @@ const PasienRoute = ({ component: Component, setTitle, ...rest }) => {
       render={(props) =>
         isLogin() ? (
           !rest.isNotFound ? (
-            !isPasien() ? (
+            !isSantri() ? (
               <>
                 <Redirect to="/admin" />
                 <Component {...props} />

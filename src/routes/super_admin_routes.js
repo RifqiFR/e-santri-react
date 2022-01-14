@@ -7,7 +7,6 @@ import SantriDetail from "pages/super-admin/SantriDetail";
 import SantriForm from "pages/super-admin/SantriForm";
 import Pengaturan from "pages/super-admin/Pengaturan";
 import Notifikasi from "pages/super-admin/Notifikasi";
-import Bendahara from "../pages/super-admin/Bendahara";
 
 export const APP_SUPER_ADMIN_ROUTE = [
   {
@@ -27,7 +26,7 @@ export const APP_SUPER_ADMIN_ROUTE = [
     // isAdmin: true,
   },
   {
-    name: "Santri",
+    name: "Tambah Santri",
     path: "/super-admin/santri/create",
     exact: true,
     component: SantriForm,
@@ -35,7 +34,7 @@ export const APP_SUPER_ADMIN_ROUTE = [
     // isAdmin: true,
   },
   {
-    name: "Santri",
+    name: "Detail Santri",
     path: "/super-admin/santri/:id",
     exact: true,
     component: SantriDetail,
@@ -51,7 +50,7 @@ export const APP_SUPER_ADMIN_ROUTE = [
     // isAdmin: true,
   },
   {
-    name: "Admin SMP",
+    name: "Tambah Admin SMP",
     path: "/super-admin/admin-smp/create",
     exact: true,
     component: AdminForm,
@@ -59,7 +58,7 @@ export const APP_SUPER_ADMIN_ROUTE = [
     // isAdmin: true,
   },
   {
-    name: "Admin SMP",
+    name: "Detail Admin SMP",
     path: "/super-admin/admin-smp/:id",
     exact: true,
     component: AdminDetail,
@@ -75,7 +74,7 @@ export const APP_SUPER_ADMIN_ROUTE = [
     // isAdmin: true,
   },
   {
-    name: "Admin SMA",
+    name: "Tambah Admin SMA",
     path: "/super-admin/admin-sma/create",
     exact: true,
     component: AdminForm,
@@ -83,7 +82,7 @@ export const APP_SUPER_ADMIN_ROUTE = [
     // isAdmin: true,
   },
   {
-    name: "Admin SMA",
+    name: "Detail Admin SMA",
     path: "/super-admin/admin-sma/:id",
     exact: true,
     component: AdminDetail,
@@ -99,7 +98,7 @@ export const APP_SUPER_ADMIN_ROUTE = [
     // isAdmin: true,
   },
   {
-    name: "Admin Merchant",
+    name: "Tambah Admin Merchant",
     path: "/super-admin/admin-merchant/create",
     exact: true,
     component: AdminForm,
@@ -107,7 +106,7 @@ export const APP_SUPER_ADMIN_ROUTE = [
     // isAdmin: true,
   },
   {
-    name: "Admin Merchant",
+    name: "Detail Admin Merchant",
     path: "/super-admin/admin-merchant/:id",
     exact: true,
     component: AdminDetail,
@@ -115,10 +114,26 @@ export const APP_SUPER_ADMIN_ROUTE = [
     // isAdmin: true,
   },
   {
-    name: "Admin SMA",
+    name: "Bendahara",
     path: "/super-admin/bendahara",
     exact: true,
-    component: Bendahara,
+    component: Admin,
+    // private: true,
+    // isAdmin: true,
+  },
+  {
+    name: "Tambah Bendahara",
+    path: "/super-admin/bendahara/create",
+    exact: true,
+    component: AdminForm,
+    // private: true,
+    // isAdmin: true,
+  },
+  {
+    name: "Detail Bendahara",
+    path: "/super-admin/bendahara/:id",
+    exact: true,
+    component: AdminDetail,
     // private: true,
     // isAdmin: true,
   },
