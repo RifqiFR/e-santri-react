@@ -1,3 +1,4 @@
+import { ANGKATAN } from "constants/dummies";
 import { SANTRI } from "constants/local_storage_keys";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
@@ -100,8 +101,9 @@ const SantriForm = (props) => {
           <Label sm={2} htmlFor="angkatan" className="pr-3 mb-0">Angkatan:</Label>
           <Col sm={10}>
             <Input name="angkatan" id="angkatan" type="select" onChange={event => setAngkatan(event.target.value)} value={angkatan}>
-              <option value="2020">2020</option>
-              <option value="2021">2021</option>
+              {ANGKATAN.map(a => (
+                <option value={a}>{a}</option>
+              ))}
             </Input>
           </Col>
         </FormGroup>

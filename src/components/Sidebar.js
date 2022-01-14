@@ -71,7 +71,7 @@ class Sidebar extends React.Component {
     });
   };
   onLogout = () => {
-    logout();
+    // logout();
     this.props.history.push("/");
   };
   closeLogoutModal = () => {
@@ -128,7 +128,7 @@ class Sidebar extends React.Component {
               <div className="d-flex justify-content-center">
                 <Button
                   color="danger"
-                  onClick={this.closeLogoutModal}
+                  onClick={this.onLogout}
                 >
                   Ya
                 </Button>
@@ -160,7 +160,6 @@ class Sidebar extends React.Component {
             {logo ? (
               <NavbarBrand className="pt--4" {...navbarBrandProps}>
                 <img
-                  width="130"
                   alt={logo.imgAlt}
                   className="navbar-brand-img"
                   src={logo.imgSrc}

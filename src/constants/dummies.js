@@ -97,3 +97,16 @@ export const SEX = [
     label: 'Perempuan',
   },
 ];
+
+export const CREDENTIALS = [
+  {
+    nip: '2012030501001',
+    password: '12345678',
+    role: 'ADMIN'
+  },
+  {
+    nip: '2012030501002',
+    password: '12345678',
+    role: 'SUPER_ADMIN'
+  },
+]
