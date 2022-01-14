@@ -100,12 +100,12 @@ export const SEX = [
 
 export const CREDENTIALS = [
   {
-    email: 'admin@gmail.com',
+    nip: '2012030501001',
     password: '12345678',
     role: 'ADMIN'
   },
   {
-    email: 'superadmin@gmail.com',
+    nip: '2012030501002',
     password: '12345678',
     role: 'SUPER_ADMIN'
   },
