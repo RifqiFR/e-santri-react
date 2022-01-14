@@ -7,13 +7,13 @@ import withReactContent from "sweetalert2-react-content";
 
 const Login = () => {
   const history = useHistory();
-  const [email, setEmail] = useState('');
+  const [nip, setNip] = useState('');
   const [password, setPassword] = useState('');
   const loginSwal = withReactContent(Swal);
 
   const loginHandler = (event) => {
     event.preventDefault();
-    const matched = CREDENTIALS.find(cr => cr.email === email && cr.password === password);
+    const matched = CREDENTIALS.find(cr => cr.nip === nip && cr.password === password);
 
     if (matched) {
       loginSwal.fire({
@@ -46,8 +46,8 @@ const Login = () => {
           <h4 className="mb-3 text-center">Login</h4>
           <Form onSubmit={loginHandler}>
             <FormGroup>
-              <Label for="email">Email</Label>
-              <Input name="email" id="email" type="email" onChange={(event) => setEmail(event.target.value)} value={email} />
+              <Label for="nip">NIP</Label>
+              <Input name="nip" id="nip" type="text" onChange={(event) => setNip(event.target.value)} value={nip} />
             </FormGroup>
             <FormGroup>
               <div className="d-flex justify-content-between">
