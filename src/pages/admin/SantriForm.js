@@ -2,7 +2,8 @@ import { ANGKATAN } from "constants/dummies";
 import { SANTRI } from "constants/local_storage_keys";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-import { Input, Label, FormGroup, Form, Button, Col } from "reactstrap";
+import logoUser from "../../images/user-avatar.jpg";
+import { Input, Label, FormGroup, Form, Button, Col, Tooltip } from "reactstrap";
 
 const SantriForm = (props) => {
   const history = useHistory();
@@ -18,6 +19,11 @@ const SantriForm = (props) => {
   const [nomorOrtu, setNomorOrtu] = useState('');
   const [emailOrtu, setEmailOrtu] = useState('');
   const [alamatOrtu, setAlamatOrtu] = useState('');
+  const [userImage, setUserImage] = React.useState(null);
+  const [fileName, setFileName] = React.useState("");
+  const [tooltipOpen, setTooltipOpen] = React.useState(false);
+
+  const toggle = () => setTooltipOpen(!tooltipOpen);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -50,12 +56,67 @@ const SantriForm = (props) => {
     history.push('/admin/santri');
   }
 
+  const handleChange = (e) => {
+    if (e.target.files.length) {
+      let file = e.target.files[0];
+      let reader = new FileReader();
+      let url = reader.readAsDataURL(file);
+
+      reader.onloadend = function (e) {
+        setFileName(reader.result)
+        setUserImage(reader.result)
+      }.bind(this);
+      console.log(url) // Would see a path?
+    }
+  }
+
   return (
     <>
       <p className="text-center">Tambah Data Santri SMA Pondok Pesantren Tambak Beras Jombang</p>
-      <div className="w-100 cursor-pointer">
-        <img className="d-block mx-auto w-25 mb-2" src={require('../../images/user-icon.png')} alt="" />
-        <p className="text-center font-weight-bold">Upload Foto</p>
+      {/*<div className="w-100 cursor-pointer">*/}
+      {/*  <img className="d-block mx-auto w-25 mb-2" src={require('../../images/user-icon.png')} alt="" />*/}
+      {/*  <p className="text-center font-weight-bold">Upload Foto</p>*/}
+      {/*</div>*/}
+      <div className="pb-2 d-flex justify-content-center">
+        <label htmlFor="upload-button" id="labelImage">
+          {userImage == null ? (
+              <img
+                src={logoUser}
+                className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
+                style={{
+                  width: "180px",
+                  cursor: "pointer",
+                }}
+                alt={logoUser.alt}
+              />
+          ) : (
+              <>
+                <img
+                  src={fileName}
+                  className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
+                  style={{
+                    width: "180px",
+                    cursor: "pointer",
+                  }}
+                  alt={fileName}
+                />
+              </>
+          )}
+        </label>
+        <Tooltip
+          placement="top"
+          isOpen={tooltipOpen}
+          target="labelImage"
+          toggle={toggle}
+        >
+          Change your profil image
+        </Tooltip>
+        <input
+          type="file"
+          id="upload-button"
+          style={{ display: "none" }}
+          onChange={handleChange}
+        />
       </div>
       <Form onSubmit={submitHandler}>
         <FormGroup row>
