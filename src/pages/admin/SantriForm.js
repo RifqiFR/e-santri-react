@@ -13,7 +13,7 @@ const SantriForm = (props) => {
   const [sex, setSex] = useState('L');
   const [tempatLahir, setTempatLahir] = useState('');
   const [tanggalLahir, setTanggalLahir] = useState('');
-  const [angkatan, setAngkatan] = useState('');
+  const [angkatan, setAngkatan] = useState('2020');
   const [namaOrtu, setNamaOrtu] = useState('');
   const [statusOrtu, setStatusOrtu] = useState('ayah');
   const [nomorOrtu, setNomorOrtu] = useState('');

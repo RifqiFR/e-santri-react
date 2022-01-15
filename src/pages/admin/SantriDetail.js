@@ -45,19 +45,19 @@ const SantriDetail = (props) => {
         </tr>
         <tr>
           <td>Nama Orang Tua</td>
-          <td>{santri?.namaOrangTua}</td>
+          <td>{santri?.namaOrtu}</td>
         </tr>
         <tr>
           <td>Nomor HP Orang Tua</td>
-          <td>{santri?.nomorOrangTua}</td>
+          <td>{santri?.nomorOrtu}</td>
         </tr>
         <tr>
           <td>Email Orang Tua</td>
-          <td>{santri?.emailOrangTua}</td>
+          <td>{santri?.emailOrtu}</td>
         </tr>
         <tr>
           <td>Alamat Orang Tua</td>
-          <td>{santri?.alamatOrangTua}</td>
+          <td>{santri?.alamatOrtu}</td>
         </tr>
         <tr>
           <td>Angkatan Santri</td>
