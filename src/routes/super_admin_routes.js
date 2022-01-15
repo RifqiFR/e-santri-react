@@ -8,6 +8,8 @@ import SantriForm from "pages/super-admin/SantriForm";
 import Pengaturan from "pages/super-admin/Pengaturan";
 import Notifikasi from "pages/super-admin/Notifikasi";
 import Bendahara from "../pages/super-admin/Bendahara";
+import BendaharaDetail from "../pages/super-admin/BendaharaDetail";
+import BendaharaForm from "../pages/super-admin/BendaharaForm";
 
 export const APP_SUPER_ADMIN_ROUTE = [
   {
@@ -115,10 +117,26 @@ export const APP_SUPER_ADMIN_ROUTE = [
     // isAdmin: true,
   },
   {
-    name: "Admin SMA",
+    name: "Bendahara",
     path: "/super-admin/bendahara",
     exact: true,
     component: Bendahara,
+    // private: true,
+    // isAdmin: true,
+  },
+  {
+    name: "Tambah Bendahara",
+    path: "/super-admin/bendahara/create",
+    exact: true,
+    component: BendaharaForm,
+    // private: true,
+    // isAdmin: true,
+  },
+  {
+    name: "Detail Bendahara",
+    path: "/super-admin/bendahara/:id",
+    exact: true,
+    component: BendaharaDetail,
     // private: true,
     // isAdmin: true,
   },
