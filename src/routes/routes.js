@@ -13,6 +13,7 @@ import Home from "pages/Home";
 import Login from "pages/Login";
 import SuperAdminContainer from "../components/super-admin/SuperAdminContainer";
 import ErrorPage from "../pages/404Pages/ErrorPage";
+import BendaharaContainer from "../components/bendahara/BendaharaContainer";
 // import Login from "../pages/Login";
 
 export const APP_ROUTE = [
@@ -43,6 +44,14 @@ export const APP_ROUTE = [
     path: "/super-admin",
     // exact: true, //di false karena ada nested Switch di dalamnya AdminCOntainer
     component: SuperAdminContainer,
+    private: false,
+    isAdmin: true,
+  },
+  {
+    name: "Bendahara Dashboard",
+    path: "/bendahara",
+    // exact: true, //di false karena ada nested Switch di dalamnya AdminCOntainer
+    component: BendaharaContainer,
     private: false,
     isAdmin: true,
   },
