@@ -24,8 +24,10 @@ const Login = () => {
       }).then(() => {
         if (matched.role === 'ADMIN') {
           history.replace('/admin');
-        } else {
-          history.replace('/super-admin');
+        } else if (matched.role === 'SUPER_ADMIN'){
+          history.replace('/super-admin/dashboard');
+        } else if (matched.role === 'BENDAHARA'){
+          history.replace('/bendahara/dashboard');
         }
       });
     } else {

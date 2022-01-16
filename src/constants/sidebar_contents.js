@@ -84,3 +84,11 @@ export const ADMIN_SIDEBAR_CONTENT = [
     icon: <BiCog size={GLOBAL_ICON_SIZE} />
   },
 ];
+
+export const BENDAHARA_SIDEBAR_CONTENT = [
+  {
+    name: "Dashboard",
+    path: "/bendahara/dashboard",
+    icon: <AiOutlineHome size={GLOBAL_ICON_SIZE}/>
+  },
+];

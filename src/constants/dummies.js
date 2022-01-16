@@ -109,4 +109,9 @@ export const CREDENTIALS = [
     password: '12345678',
     role: 'SUPER_ADMIN'
   },
+  {
+    nip: '2111',
+    password: 'password',
+    role: 'BENDAHARA'
+  },
 ]
