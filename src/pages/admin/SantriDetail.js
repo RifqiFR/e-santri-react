@@ -1,3 +1,4 @@
+import { CLASSES } from "constants/dummies";
 import { SANTRI } from "constants/local_storage_keys";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
@@ -6,6 +7,7 @@ import { Table, Button } from "reactstrap";
 const SantriDetail = (props) => {
   const { id: santriId } = useParams();
   const [santri, setSantri] = useState(null);
+  const [kelas, setKelas] = useState('');
 
   useEffect(() => {
     const str = localStorage.getItem(SANTRI);
@@ -14,6 +16,7 @@ const SantriDetail = (props) => {
     const santri = data.find(d => d.id === +santriId);
 
     setSantri(santri);
+    setKelas(CLASSES.find(cl => cl.value === santri.kelas).name);
   }, [santriId])
 
   return (
@@ -42,6 +45,10 @@ const SantriDetail = (props) => {
         <tr>
           <td>Tempat, Tanggal Lahir</td>
           <td>{santri?.tempatLahir}, {santri?.tanggalLahir}</td>
+        </tr>
+        <tr>
+          <td>Kelas</td>
+          <td>{kelas}</td>
         </tr>
         <tr>
           <td>Nama Orang Tua</td>

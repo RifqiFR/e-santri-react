@@ -1,4 +1,4 @@
-import { ANGKATAN } from "constants/dummies";
+import { ANGKATAN, CLASSES } from "constants/dummies";
 import { SANTRI } from "constants/local_storage_keys";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
@@ -13,6 +13,7 @@ const SantriForm = (props) => {
   const [sex, setSex] = useState('L');
   const [tempatLahir, setTempatLahir] = useState('');
   const [tanggalLahir, setTanggalLahir] = useState('');
+  const [kelas, setKelas] = useState('10-a');
   const [angkatan, setAngkatan] = useState('2020');
   const [namaOrtu, setNamaOrtu] = useState('');
   const [statusOrtu, setStatusOrtu] = useState('ayah');
@@ -43,6 +44,7 @@ const SantriForm = (props) => {
       sex,
       tempatLahir,
       tanggalLahir,
+      kelas,
       angkatan,
       namaOrtu,
       statusOrtu,
@@ -65,7 +67,7 @@ const SantriForm = (props) => {
       reader.onloadend = function (e) {
         setFileName(reader.result)
         setUserImage(reader.result)
-      }.bind(this);
+      };
       console.log(url) // Would see a path?
     }
   }
@@ -159,11 +161,21 @@ const SantriForm = (props) => {
           </Col>
         </FormGroup>
         <FormGroup row>
+          <Label sm={2} htmlFor="kelas" className="pr-3 mb-0">Kelas:</Label>
+          <Col sm={10}>
+            <Input name="kelas" id="kelas" type="select" onChange={event => setKelas(event.target.value)} value={kelas}>
+              {CLASSES.map(cl => (
+                <option key={cl.value} value={cl.value}>{cl.name}</option>
+              ))}
+            </Input>
+          </Col>
+        </FormGroup>
+        <FormGroup row>
           <Label sm={2} htmlFor="angkatan" className="pr-3 mb-0">Angkatan:</Label>
           <Col sm={10}>
             <Input name="angkatan" id="angkatan" type="select" onChange={event => setAngkatan(event.target.value)} value={angkatan}>
               {ANGKATAN.map(a => (
-                <option value={a}>{a}</option>
+                <option key={a} value={a}>{a}</option>
               ))}
             </Input>
           </Col>

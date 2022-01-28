@@ -7,6 +7,7 @@ export const SANTRI = [
     alamat: "Jalan rungkut",
     tempatLahir: "Mojokerto",
     tanggalLahir: "2001-04-03",
+    kelas: "10-a",
     angkatan: 2020,
     namaOrtu: "Bapak Sudrajat",
     statusOrtu: "ayah",
@@ -23,6 +24,7 @@ export const SANTRI = [
     alamat: "Jalan rungkut",
     tempatLahir: "Mojokerto",
     tanggalLahir: "2001-04-03",
+    kelas: "10-a",
     angkatan: 2020,
     namaOrtu: "Bapak Sudrajat",
     statusOrtu: "ayah",
@@ -39,6 +41,7 @@ export const SANTRI = [
     alamat: "Jalan rungkut",
     tempatLahir: "Mojokerto",
     tanggalLahir: "2001-04-03",
+    kelas: "10-a",
     angkatan: 2020,
     namaOrtu: "Bapak Sudrajat",
     statusOrtu: "ayah",
@@ -55,6 +58,7 @@ export const SANTRI = [
     alamat: "Jalan rungkut",
     tempatLahir: "Mojokerto",
     tanggalLahir: "2001-04-03",
+    kelas: "10-b",
     angkatan: 2020,
     namaOrtu: "Bapak Sudrajat",
     statusOrtu: "ayah",
@@ -71,6 +75,7 @@ export const SANTRI = [
     alamat: "Jalan rungkut",
     tempatLahir: "Mojokerto",
     tanggalLahir: "2001-04-03",
+    kelas: "10-c",
     angkatan: 2020,
     namaOrtu: "Bapak Sudrajat",
     statusOrtu: "ayah",
@@ -113,5 +118,20 @@ export const CREDENTIALS = [
     nip: '2111',
     password: 'password',
     role: 'BENDAHARA'
+  },
+]
+
+export const CLASSES = [
+  {
+    name: "10 A",
+    value: "10-a"
+  },
+  {
+    name: "10 B",
+    value: "10-b"
+  },
+  {
+    name: "10 C",
+    value: "10-c"
   },
 ]
