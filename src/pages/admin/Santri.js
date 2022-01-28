@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { Input, Label, Table, FormGroup, Form, Button } from "reactstrap";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { ANGKATAN, SANTRI as DUMMY_SANTRI } from "../../constants/dummies"
+import { ANGKATAN, CLASSES, SANTRI as DUMMY_SANTRI } from "../../constants/dummies"
 
 const Santri = () => {
   const [santri, setSantri] = useState([]);
   const [displayedSantri, setDisplayedSantri] = useState([]);
   const [filterPendidikan, setFilterPendidikan] = useState('SMA');
+  const [filterKelas, setFilterKelas] = useState('10-c');
   const [filterAngkatan, setFilterAngkatan] = useState(2020);
   const deleteSwal = withReactContent(Swal);
 
@@ -82,11 +83,21 @@ const Santri = () => {
             </div>
           </FormGroup>
           <FormGroup row>
+            <Label sm={2} htmlFor="kelas" className="pr-3 mb-0">Kelas:</Label>
+            <div sm={10}>
+              <Input name="kelas" id="kelas" type="select" onChange={(event) => setFilterKelas(event.target.value)} value={filterKelas}>
+                {CLASSES.map(cl => (
+                  <option key={cl.value} value={cl.value}>{cl.name}</option>
+                ))}
+              </Input>
+            </div>
+          </FormGroup>
+          <FormGroup row>
             <Label sm={2} htmlFor="pendidikan" className="pr-3 mb-0">Angkatan:</Label>
             <div sm={10}>
               <Input name="angkatan" id="angkatan" type="select" onChange={(event) => setFilterAngkatan(event.target.value)} value={filterAngkatan}>
                 {ANGKATAN.map(a => (
-                  <option value={a}>{a}</option>
+                  <option key={a} value={a}>{a}</option>
                 ))}
               </Input>
             </div>
@@ -113,6 +124,9 @@ const Santri = () => {
               Jenis Kelamin
             </th>
             <th>
+              Kelas
+            </th>
+            <th>
               Aksi
             </th>
           </tr>
@@ -128,6 +142,9 @@ const Santri = () => {
               </td>
               <td className="align-middle">
                 {s.sex}
+              </td>
+              <td className="align-middle">
+                {CLASSES.find(cl => cl.value === s.kelas).name}
               </td>
               <td className="d-flex justify-content-center">
                 <Link to={`/admin/santri/${s.id}`} className="mr-2"><Button color="warning">Lihat</Button></Link>
