@@ -6,22 +6,27 @@
 // import sessionstorage from 'sessionstorage';
 import Cookies from "js-cookie";
 
-export const setUserLogin = (user) => {
+export const saveToken = (user) => {
   Cookies.set("USER", user);
 };
 export const login = (user) => {
   Cookies.set("USER", user);
 };
 
-export const logout = () => {
+export const removeToken = () => {
   Cookies.remove("USER");
 };
 
 export const isLogin = () => {
-  if (Cookies.get("USER")) {
-    return true;
+  const loginData = parseLoginToken();
+
+  if (loginData) {
+    const exp = loginData.exp;
+    
+    return (+exp * 1000) > Date.now();
+  } else {
+    return false;
   }
-  return false;
 };
 
 export const isPasien = () => {
@@ -30,15 +35,23 @@ export const isPasien = () => {
   }
   return false;
 };
-export const isAdmin = () => {
-  if (Cookies.getJSON("USER")?.role === "Admin") {
-    return true;
+
+export const parseLoginToken = () => {
+  const token = Cookies.get("USER");
+
+  if (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+  
+    return JSON.parse(jsonPayload);
+  } else {
+    return null;
   }
-  return false;
 };
-export const isSuperAdmin = () => {
-  if (Cookies.getJSON("USER")?.role === "Super Admin") {
-    return true;
-  }
-  return false;
-};
+
+export const isLoginExpired = () => {
+
+}

@@ -35,7 +35,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import { logout } from "utils/auth";
+import { removeToken } from "utils/auth";
 import puskesmasIcon from "images/admin/puskesmas.png";
 import clinicIcon from "images/admin/clinic.png";
 import listIcon from "images/admin/list.png";
@@ -44,8 +44,10 @@ import infoAbout from "images/admin/info.png";
 import { ImExit } from "react-icons/im";
 import { GLOBAL_ICON_SIZE } from "constants/sidebar_contents";
 import { IoMdExit } from "react-icons/io";
+import { AuthContext } from "context/auth_context";
 
 class Sidebar extends React.Component {
+  static contextType = AuthContext;
   state = {
     collapseOpen: false,
     logoutModalOpen: false,
@@ -71,7 +73,8 @@ class Sidebar extends React.Component {
     });
   };
   onLogout = () => {
-    // logout();
+    removeToken();
+    this.context.setIsLogin(false);
     this.props.history.push("/");
   };
   closeLogoutModal = () => {

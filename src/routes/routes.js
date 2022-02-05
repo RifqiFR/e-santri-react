@@ -14,7 +14,6 @@ import Login from "pages/Login";
 import SuperAdminContainer from "../components/super-admin/SuperAdminContainer";
 import ErrorPage from "../pages/404Pages/ErrorPage";
 import BendaharaContainer from "../components/bendahara/BendaharaContainer";
-// import Login from "../pages/Login";
 
 export const APP_ROUTE = [
   {
@@ -23,6 +22,7 @@ export const APP_ROUTE = [
     exact: true,
     component: Login,
     restricted: true,
+    isGuest: true,
   },
   {
     name: "Home",
@@ -72,3 +72,60 @@ export const APP_ROUTE = [
     isNotFound: true,
   }
 ];
+
+// export const APP_ROUTE = [
+//   {
+//     name: 'Home',
+//     path: '/',
+//     pageComponent: Home,
+//     exact: true,
+//   },
+//   {
+//     name: 'Login',
+//     path: '/login',
+//     pageComponent: Login,
+//     middleware: {
+//       middleware: () => !isLogin(),
+//       redirectPath: ''
+//     },
+//     exact: true,
+//   },
+//   {
+//     name: "Admin Dashboard",
+//     path: "/admin",
+//     pageComponent: AdminContainer,
+//     middleware: {
+//       middleware: isAdminSantri,
+//       redirectPath: '/login'
+//     },
+//   },
+//   {
+//     name: "Super Admin Dashboard",
+//     path: "/super-admin",
+//     pageComponent: SuperAdminContainer,
+//     middleware: {
+//       middleware: isSuperAdmin,
+//       redirectPath: '/login'
+//     },
+//   },
+//   {
+//     name: "Bendahara Dashboard",
+//     path: "/bendahara",
+//     pageComponent: BendaharaContainer,
+//     middleware: {
+//       middleware: isBendahara,
+//       redirectPath: '/login'
+//     },
+//   },
+//   {
+//     name: "Error Page not found",
+//     path: "/error",
+//     pageComponent: ErrorPage,
+//     exact: true,
+//   },
+//   {
+//     name: "Error Page not found",
+//     path: "/*",
+//     pageComponent: ErrorPage,
+//   },
+// ];

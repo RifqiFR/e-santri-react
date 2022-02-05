@@ -16,7 +16,7 @@ import { MdHttps } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import { IoMdExit, IoMdNotifications } from "react-icons/io";
 import { Link, useHistory } from "react-router-dom";
-import { logout } from "utils/auth";
+import { removeToken } from "utils/auth";
 import { GET_SELF, JWT_HEADER } from "constants/urls";
 import axios from "axios";
 import ModalShowChangePassword from "components/ModalChangePassword";
@@ -48,7 +48,7 @@ const Header = () => {
   // }, []);
 
   const onLogout = () => {
-    logout();
+    removeToken();
     history.replace("/");
   };
   const toProfile = () => {

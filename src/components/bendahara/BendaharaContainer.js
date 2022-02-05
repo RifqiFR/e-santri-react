@@ -16,10 +16,14 @@ import "admin-assets/plugins/nucleo/css/nucleo.css";
 
 import { BENDAHARA_SIDEBAR_CONTENT } from "../../constants/sidebar_contents"
 import BendaharaRoute from "../BendaharaRoute";
+import useRoleGuard from "hooks/use_role_guard";
+import { BENDAHARA } from "constants/roles";
 
 const BendaharaContainer = (props) => {
   const [title, setTitle] = React.useState("");
   const [path, setPath] = React.useState("");
+
+  useRoleGuard(BENDAHARA);
 
   return (
     <>

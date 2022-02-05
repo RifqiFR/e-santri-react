@@ -5,8 +5,7 @@ import { Container, Row, Col, Card, CardBody, CardHeader } from "reactstrap";
 
 import Header from "components/admin/Header.js";
 import Sidebar from "components/Sidebar.js";
-import { Link, Switch, Redirect } from "react-router-dom";
-import AdminRoute from "components/AdminRoute";
+import { Link, Switch } from "react-router-dom";
 import { APP_SUPER_ADMIN_ROUTE } from "routes/super_admin_routes";
 import { FaHome } from "react-icons/fa";
 import FooterBar from "../FooterBar";
@@ -16,10 +15,14 @@ import "admin-assets/plugins/nucleo/css/nucleo.css";
 
 import { SUPERADMIN_SIDEBAR_CONTENT } from "../../constants/sidebar_contents"
 import SuperAdminRoute from "../SuperAdminRoute";
+import useRoleGuard from "hooks/use_role_guard";
+import { SUPER_ADMIN } from "constants/roles";
 
 const SuperAdminContainer = (props) => {
   const [title, setTitle] = React.useState("");
   const [path, setPath] = React.useState("");
+
+  useRoleGuard(SUPER_ADMIN);
 
   return (
     <>

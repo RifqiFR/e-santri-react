@@ -7,40 +7,18 @@
 */
 
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
-import { isLogin, isPasien } from "utils/auth";
+import { Route } from "react-router-dom";
 
 const PublicRoute = ({
   component: Component,
   isNotFound,
-  restricted,
+  isAdmin,
   ...rest
 }) => {
   return (
     <Route
       {...rest}
       render={(props) =>
-        // isLogin() && restricted ? (
-        //   !isNotFound ? (
-        //     isPasien() ? (
-        //       <Redirect to="/pasien" />
-        //     ) : (
-        //       <Redirect to="/admin/antrian-pasien" />
-        //     )
-        //   ) : (
-        //     <>
-        //       <Redirect to="/error" />
-        //       <Component {...props} />
-        //     </>
-        //   )
-        // ) : isNotFound ? (
-        //   <>
-        //     <Redirect to="/error" />
-        //     <Component {...props} />
-        //   </>
-        // ) : (
-        //   <Component {...props} />
-        // )
         <Component {...props} />
       }
     />

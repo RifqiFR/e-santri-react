@@ -1,13 +1,3 @@
-/*
-  Ini halaman dashboard, sebenernya gak sehat cara setstate kayak gini, harusnya pake useReducer
-  karena tiap setState itu komponennya rerender (ngefek ke performa nanti). 
-  Cuman karena biar simpel ya gini dulu aja gpp (useReducer agak mbingungi)
-
-  Disini pas baru render component, fungsi didalam useEffect kepanggil, dia ngefetch API dari API-nya
-  Studio Ghibli (disclaimer: aku bukan wibu). Fetchnya pake axios biar gampang, terus render sesuai
-  kondisi state film / error / loading pake inline conditional.
-*/
-
 import React from "react";
 import {
   Button,
@@ -90,7 +80,6 @@ const DUMY_LINE_CHART_OPTIONS = {
 };
 
 const Dashboard = () => {
-
   return (
     <>
       <div className="chart h-100 mb-2">

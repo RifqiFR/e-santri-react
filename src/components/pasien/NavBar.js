@@ -7,7 +7,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { IoMdExit } from "react-icons/io";
 import logoNavbar from "../../images/navbar logo.png";
 import logoUser from "../../images/user icon.png";
-import { logout } from "utils/auth";
+import { removeToken } from "utils/auth";
 import ModalShowChangePassword from "../ModalChangePassword";
 
 const NavBar = (props) => {
@@ -19,7 +19,7 @@ const NavBar = (props) => {
     setModalShow(true);
   };
   const _onLogout = () => {
-    logout();
+    removeToken();
     history.replace("/");
   };
 
