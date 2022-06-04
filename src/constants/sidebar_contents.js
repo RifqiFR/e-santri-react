@@ -4,7 +4,7 @@ import { MdGroup } from "react-icons/md";
 import { FaUserGraduate, FaMoneyBillWave } from "react-icons/fa";
 import { HiOutlineCash } from "react-icons/hi";
 import { GrNotification, GrUserSettings } from "react-icons/gr";
-import { BiCog } from "react-icons/bi";
+import { BiCog, BiMoney } from "react-icons/bi";
 import { IoMdExit } from "react-icons/io";
 
 export const GLOBAL_ICON_SIZE = 20;
@@ -13,7 +13,7 @@ export const SUPERADMIN_SIDEBAR_CONTENT = [
   {
     name: "Dashboard",
     path: "/super-admin/dashboard",
-    icon: <AiOutlineHome size={GLOBAL_ICON_SIZE}/>
+    icon: <AiOutlineHome size={GLOBAL_ICON_SIZE} />
   },
   {
     name: "Santri",
@@ -56,7 +56,7 @@ export const ADMIN_SIDEBAR_CONTENT = [
   {
     name: "Dashboard",
     path: "/admin/dashboard",
-    icon: <AiOutlineHome size={GLOBAL_ICON_SIZE}/>
+    icon: <AiOutlineHome size={GLOBAL_ICON_SIZE} />
   },
   {
     name: "Santri",
@@ -89,6 +89,16 @@ export const BENDAHARA_SIDEBAR_CONTENT = [
   {
     name: "Dashboard",
     path: "/bendahara/dashboard",
-    icon: <AiOutlineHome size={GLOBAL_ICON_SIZE}/>
+    icon: <AiOutlineHome size={GLOBAL_ICON_SIZE} />
+  },
+  {
+    name: "Pencairan Dana",
+    path: "/bendahara/pencairan-dana",
+    icon: <BiMoney size={GLOBAL_ICON_SIZE} />
+  },
+  {
+    name: "Pengaturan",
+    path: "/bendahara/pengaturan",
+    icon: <BiCog size={GLOBAL_ICON_SIZE} />
   },
 ];
