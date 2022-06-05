@@ -5,12 +5,14 @@ const DetailField = ({ fieldData }) => {
 
   return (
     <Table bordered className="mb-4">
-      {fieldData?.map(d => (
-        <tr key={d.label}>
-          <td>{d.label}</td>
-          <td>{d.value}</td>
-        </tr>
-      ))}
+      <tbody>
+        {fieldData?.map(d => (
+          <tr key={d.label}>
+            <td>{d.label}</td>
+            <td>{d.value}</td>
+          </tr>
+        ))}
+      </tbody>
     </Table>
   );
 };

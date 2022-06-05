@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Form, Input, Button, Table } from "reactstrap";
 
 const PencairanDana = () => {
@@ -11,7 +12,7 @@ const PencairanDana = () => {
           <span> entries</span>
         </div>
         <Form className="d-flex" onSubmit={null}>
-          <Input className="mr-2" type="text" name="search" id="search" onChange={(event) => null} value={null} />
+          <Input className="mr-2" type="text" name="search" id="search" />
           <Button color="secondary">Cari</Button>
         </Form>
       </div>
@@ -41,7 +42,7 @@ const PencairanDana = () => {
               1
             </th>
             <td className="align-middle">
-              Mitra Media
+              Sakinah Food
             </td>
             <td className="align-middle">
               Rp750.000,-
@@ -50,7 +51,7 @@ const PencairanDana = () => {
               Selesai
             </td>
             <td className="align-middle">
-              <Button color='warning'>Lihat Data</Button>
+              <Link className="btn btn-warning" to={`/bendahara/pencairan-dana/1/lihat`}>Lihat Data</Link>
               <Button color='danger'>Hapus Data</Button>
             </td>
           </tr>
@@ -92,7 +93,7 @@ const PencairanDana = () => {
               Belum Selesai
             </td>
             <td className="align-middle">
-              <Button color='dark'>Cairkan Dana</Button>
+              <Link className="btn btn-dark" to={`/bendahara/pencairan-dana/2/cairkan`}>Cairkan Dana</Link>
             </td>
           </tr>
           <tr>
@@ -109,7 +110,7 @@ const PencairanDana = () => {
               Belum Selesai
             </td>
             <td className="align-middle">
-              <Button color='dark'>Cairkan Dana</Button>
+              <Link className="btn btn-dark" to={`/bendahara/pencairan-dana/3/cairkan`}>Cairkan Dana</Link>
             </td>
           </tr>
         </tbody>
