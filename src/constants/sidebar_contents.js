@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineHome, AiOutlineIdcard } from "react-icons/ai";
+import { AiOutlineBell, AiOutlineHome, AiOutlineIdcard, AiOutlineShop } from "react-icons/ai";
 import { MdGroup } from "react-icons/md";
 import { FaUserGraduate, FaMoneyBillWave } from "react-icons/fa";
 import { HiOutlineCash } from "react-icons/hi";
@@ -99,6 +99,29 @@ export const BENDAHARA_SIDEBAR_CONTENT = [
   {
     name: "Pengaturan",
     path: "/bendahara/pengaturan",
+    icon: <BiCog size={GLOBAL_ICON_SIZE} />
+  },
+];
+
+export const MERCHANT_SIDEBAR_CONTENT = [
+  {
+    name: "Dashboard",
+    path: "/merchant/dashboard",
+    icon: <AiOutlineHome size={GLOBAL_ICON_SIZE} />
+  },
+  {
+    name: "Data Merchant",
+    path: "/merchant/data-merchant",
+    icon: <AiOutlineShop size={GLOBAL_ICON_SIZE} />
+  },
+  {
+    name: "Notifikasi",
+    path: "/merchant/notifikasi",
+    icon: <AiOutlineBell size={GLOBAL_ICON_SIZE} />
+  },
+  {
+    name: "Pengaturan",
+    path: "/merchant/pengaturan",
     icon: <BiCog size={GLOBAL_ICON_SIZE} />
   },
 ];
