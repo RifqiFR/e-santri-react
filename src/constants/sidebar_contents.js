@@ -125,3 +125,11 @@ export const MERCHANT_SIDEBAR_CONTENT = [
     icon: <BiCog size={GLOBAL_ICON_SIZE} />
   },
 ];
+
+export const SANTRI_SIDEBAR_CONTENT = [
+  {
+    name: "Ubah Pin",
+    path: "/santri/ubah-pin",
+    icon: <AiOutlineHome size={GLOBAL_ICON_SIZE} />
+  },
+];

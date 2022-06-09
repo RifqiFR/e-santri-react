@@ -15,6 +15,7 @@ import SuperAdminContainer from "../components/super-admin/SuperAdminContainer";
 import ErrorPage from "../pages/404Pages/ErrorPage";
 import BendaharaContainer from "../components/bendahara/BendaharaContainer";
 import MerchantContainer from "../components/merchant/MerchantContainer";
+import SantriContainer from "../components/santri/SantriContainer";
 // import Login from "../pages/Login";
 
 export const APP_ROUTE = [
@@ -61,6 +62,14 @@ export const APP_ROUTE = [
     path: "/merchant",
     // exact: true, //di false karena ada nested Switch di dalamnya AdminCOntainer
     component: MerchantContainer,
+    private: false,
+    isAdmin: true,
+  },
+  {
+    name: "Santri",
+    path: "/santri",
+    // exact: true, //di false karena ada nested Switch di dalamnya AdminCOntainer
+    component: SantriContainer,
     private: false,
     isAdmin: true,
   },
