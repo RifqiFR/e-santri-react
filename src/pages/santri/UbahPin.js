@@ -20,7 +20,6 @@ const UbahPin = () => {
           <div className="p-4">
             <p className="h2 text-center"><strong>Pin Telah Berhasil Diubah</strong></p>
             <img src={require('../../images/checked.png')} className="d-block w-25 mx-auto my-4" alt="logout" />
-            {/* <Button class="d-block mx-auto" color="secondary" onClick={() => setSuccessModalOpen(false)}>Tidak</Button> */}
           </div>
         </ModalBody>
       </Modal>
